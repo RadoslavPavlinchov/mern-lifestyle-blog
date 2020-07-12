@@ -6,14 +6,25 @@ const { cookie } = require('../config/config');
 module.exports = {
     get: {
         login: (req, res, next) => {
-
+            console.log('Login page')
+            return;
+            // User.find()
+            //     .then((users) => res.send(users))
+            //     .catch(next)
         },
         register: (req, res, next) => {
-
+            console.log('Register page')
+            return;
         },
         logout: (req, res, next) => {
-            res.clearCookie(cookie)
+            const token = req.cookies[cookie];
 
+            models.TokenBlacklist.create({ token })
+                .then(() => {
+                    res.clearCookie(cookie)
+                        .send('Logout successfully!');
+                })
+                .catch(next);
         }
     },
     post: {
@@ -25,13 +36,16 @@ module.exports = {
                     Promise.all([user, user.matchPassword(password)])
                         .then(([user, match]) => {
                             if (!match) {
-
+                                res.status(401).send('Invalid password');
                                 return;
                             }
                             const token = jwt.createToken({ id: user._id });
 
                             res.cookie(cookie, token, { maxAge: 3600000 })
-
+                                .send(user)
+                        })
+                        .catch(err => {
+                            console.log(err)
                         })
                 })
         },
@@ -39,8 +53,7 @@ module.exports = {
             const { username, password, repeatPassword } = req.body;
 
             if (password !== repeatPassword) {
-
-                return;
+                res.status(400).send('Passwords do not match!');
             }
 
             User.create({ username, password })
@@ -48,6 +61,7 @@ module.exports = {
                     const token = jwt.createToken({ id: registeredUser._id });
 
                     res.cookie(cookie, token, { maxAge: 3600000 })
+                        .send(registeredUser)
 
                 }).catch((err) => {
                     if (err.name === 'MongoError') {

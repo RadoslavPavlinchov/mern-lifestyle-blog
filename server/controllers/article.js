@@ -27,8 +27,11 @@ module.exports = {
         delete: (req, res, next) => {
             const { id } = req.params;
             Article.findByIdAndRemove(id)
-                .then(() => {
-
+                .then((article) => {
+                    res.send(article)
+                })
+                .catch(err => {
+                    console.log(err)
                 })
         },
 
@@ -46,7 +49,7 @@ module.exports = {
     },
     post: {
         create: (req, res) => {
-            let { title, description, imageUrl } = req.body;
+            const { title, description, imageUrl } = req.body;
 
             Article.create({ title, description, imageUrl, creator: req.user._id })
                 .then(article => {
@@ -57,10 +60,7 @@ module.exports = {
                 }).then(() => {
 
                 }).catch((err) => {
-                    if (err.name === 'MongoError') {
-                        // res.render('article/create', { message: 'Article already exists!' });
-                        return;
-                    }
+                    console.log(err)
                 })
         },
 
@@ -69,8 +69,8 @@ module.exports = {
             let { title, description, imageUrl } = req.body;
 
             Article.findByIdAndUpdate({ _id: id }, { title, description, imageUrl })
-                .then(() => {
-                    
+                .then((article) => {
+                    res.send(article)
                 })
                 .catch(err => {
                     console.log(err);

@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const controllers = require('../../controllers');
-const auth = require('../../utils/auth');
+const controllers = require('../controllers');
+const auth = require('../utils/auth');
 
 router.get('/login', controllers.user.get.login);
 router.get('/register', controllers.user.get.register);
