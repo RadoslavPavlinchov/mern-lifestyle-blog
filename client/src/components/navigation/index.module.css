@@ -1,0 +1,74 @@
+.nav {
+    background-color: #ccc;
+    padding: 0 2rem;
+    /* height: 0rem;
+    min-height: 40vh; */
+    overflow: hidden;
+}
+
+.brand {
+    font-size: 1.6rem;
+    padding: 1rem 0;
+    display: block;
+}
+
+.navItems {
+    display: flex;
+    margin: 0;
+}
+
+.navLink {
+    padding: 1.6rem 1rem;
+    font-size: 1.1rem;
+    position: relative;
+}
+
+.navLink:hover {
+    background-color: yellow;
+}
+
+/* .navAnchor:hover {
+    color: green;
+} */
+
+/* .navMenu { INCLUDED IN THE .flexRow DIRECTLY
+    justify-content: space-between;
+} */
+
+.navMenu {                   
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* .navBrand {
+    font-size: 1.6rem;
+    padding: 1rem 0;
+    display: block;
+} */
+
+/* .flexRow { SHOULD BE USED AS A GLOBAL CLASS
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+ } */
+
+.social {
+    padding: 1.4rem 0;
+}
+
+.navIcon {
+    padding: 0 .3rem;
+}
+
+.navIcon:hover {
+    color: hotpink;
+}
+
+/* @media only screen and (max-width: 750px) {
+    .navMenu{
+        flex-direction: column;
+    }
+} */
+
