@@ -1,0 +1,32 @@
+.siteTitle {
+    background: url('../../../images/photo-1524046661702-8dde9f762203.jpg');
+    background-size: cover;
+    height: 110vh;
+    display: flex;
+    justify-content: center;
+}
+
+.siteBackground {
+    padding-top: 35rem;
+    text-align: center;
+    color: #fff;
+}
+
+h1, h3 {
+    margin: .3rem;
+}
+
+.btn {
+    margin: 1.8rem;
+    border: none;
+    border-radius: 2rem;
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+}
