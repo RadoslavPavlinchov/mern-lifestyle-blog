@@ -24,6 +24,16 @@ h3 {
   font-size: 1.3rem;
 }
 
+.flex-row{
+  display: flex;
+  flex-direction: row;    
+  flex-wrap: wrap;
+}
+
+.container{
+  margin: 0 5vw;
+}
+
 /* button.btn {
   border: none;
   border-radius: 2rem;
