@@ -2,8 +2,9 @@ import React from 'react';
 import './App.css';
 import Navigation from './components/navigation';
 import Footer from './components/footer';
-import Main from './components/main/main-page'
-import Carousel from './components/main/main-carousel'
+import Main from './components/main/main-page';
+import Carousel from './components/main/main-carousel';
+import ArticleContainer from './components/article/article-container';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebook, faTwitter, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -17,6 +18,8 @@ function App() {
 
       <Navigation />
       <Main />
+
+      <ArticleContainer />
 
       <Carousel />
 
