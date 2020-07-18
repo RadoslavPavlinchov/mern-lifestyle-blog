@@ -5,6 +5,8 @@ import Footer from './components/footer';
 import Main from './components/main/main-page';
 import Carousel from './components/main/main-carousel';
 import ArticleContainer from './components/article/article-container';
+import ArticleLanding from './components/article/article-landing';
+
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebook, faTwitter, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -17,7 +19,11 @@ function App() {
     <div className="App">
 
       <Navigation />
+
+      <ArticleLanding />
       <Main />
+
+
 
       <ArticleContainer />
 

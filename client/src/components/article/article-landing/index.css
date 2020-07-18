@@ -1,0 +1,45 @@
+.wrapper {
+    width: 80%;
+    margin: 0 auto;
+    height: 90vh;
+}
+
+.index-links div {
+    margin: 60px 10px 0;
+    height: 230px;
+    float: left;
+    /* border: 1px solid red; */
+}
+
+/* .index-links img {
+    max-width: 100%;
+    max-height: 100%;
+} */
+
+.index-boxlink-rectangle img {
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 100%;
+}
+
+.index-boxlink-square img {
+    max-width: 100%;
+    max-height: 100%;
+    min-height: 100%;
+}
+
+/* .index-links {
+    overflow: hidden;
+} */
+
+.index-boxlink-square {
+    width: calc(25% - 20px);
+}
+
+.index-boxlink-rectangle {
+    width: calc(50% - 20px);
+}
+
+.index-links div h3 {
+    line-height: 10px;
+}
