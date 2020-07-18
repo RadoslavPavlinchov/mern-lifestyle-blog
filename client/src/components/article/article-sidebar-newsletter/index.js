@@ -1,13 +1,13 @@
 import React from 'react';
-import './index.css'
+import styles from './index.module.css'
 
 const Newsletter = () => {
     return (
-        <div className="newsletter">
+        <div className={styles.newsletter}>
             <h2>Newsletter</h2>
-            <div className="form-element">
-                <input type="text" className="input-element" placeholder="Email"/>
-                <button className="btn-1 form-btn">Subscribe</button>
+            <div className={styles['form-element']}>
+                <input type="text" className={styles['input-element']} placeholder="Email"/>
+                <button className={styles['btn-1', 'form-btn']}>Subscribe</button>
             </div>
         </div>
     )
