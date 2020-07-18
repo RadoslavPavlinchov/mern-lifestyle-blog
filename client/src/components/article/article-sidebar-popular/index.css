@@ -1,0 +1,43 @@
+.small-post-content {
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.small-popular-posts h2 {
+    padding-top: 8rem;
+}
+
+.small-post-content > .small-post-image, .small-post-title {
+    padding: 1rem 2rem;
+    position: relative;
+}
+
+.small-post-content > .small-post-image .small-post-info {
+    background: white;
+    padding: .4rem .1rem;
+    position: absolute;
+    bottom: 0rem;
+    left: 1.5rem;
+    border-radius: 0rem;
+}
+
+.small-post-content > .small-post-image > div {
+    overflow: hidden;
+}
+
+.small-post-content > .small-post-image .img {
+    width: 100%;
+    /* transition: all 1s ease; */
+}
+
+/* .small-post-content > .small-post-image .img:hover {
+    transform: scale(1.3);
+} */
+
+.small-post-content > .small-post-image .small-post-info span {
+    margin: 0 .5rem;
+}
+
+.small-post-content .small-post-title a {
+    font-size: 1rem;
+}
