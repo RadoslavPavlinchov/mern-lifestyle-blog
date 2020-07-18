@@ -1,0 +1,51 @@
+.footer {
+    height: 100%;
+    background: #000000e5;
+    position: relative;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.footer-container > div {
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 3rem .9rem;
+}
+
+.footer-container > div > h2 {
+    color: white;
+}
+
+.about-us {
+
+}
+
+.newsletter {
+
+}
+
+.instagram div > img{
+    display: inline-block;
+    width: 25%;
+    height: 50%;
+    margin: .3rem .4rem;
+}
+
+.follow-us div > h3{
+    color: white;
+}
+
+.follow-us p {
+    color: rgb(105, 105, 105);
+}
+
+.rights {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;
+    color: white;
+}
