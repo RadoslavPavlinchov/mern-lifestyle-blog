@@ -1,0 +1,28 @@
+.newsletter {
+    padding-top: 10rem;
+}
+
+.form-element {
+    padding: .5rem 2rem;
+}
+
+.input-element {
+    width: 80%;
+    height: 1.9rem;
+    padding: .3rem .5rem;
+    font-size: 1rem;
+}
+
+.form-btn {
+    border-radius: 0;
+    padding: .8rem 32%;
+    background: grey;
+    margin: 1rem 0;
+}
+
+.btn-1 {
+    border: none;
+    border-radius: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+}

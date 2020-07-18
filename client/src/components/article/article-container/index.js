@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
 import ArticleSingle from '../article-single';
+import Sidebar from '../article-sidebar';
 
 const ArticleContainer = () => {
     return (
@@ -19,9 +20,8 @@ const ArticleContainer = () => {
                         <a href="#">right arrow</a>
                     </div>
                 </div>
-                <aside className="sidebar">
-                    <h1>Side Bar</h1>
-                </aside>
+
+                <Sidebar />
             </div>
         </section>
     )
