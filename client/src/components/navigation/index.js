@@ -1,65 +1,30 @@
 import React from 'react';
 import styles from './index.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-const navLinks = [
-    {
-        title: 'Home',
-        path: '/'
-    },
-    {
-        title: 'Blog',
-        path: '/blog'
-    },
-    {
-        title: 'Contact Us',
-        path: '/contact-us'
-    },
-    {
-        title: 'Login',
-        path: '/login'
-    },
-    {
-        title: 'Register',
-        path: '/register'
-    }
-];
-
-const socialLinks = [
-    {
-        type: "fab",
-        code: "facebook"
-    },
-    {
-        type: "fab",
-        code: "twitter"
-    },
-    {
-        type: "fab",
-        code: "instagram"
-    },
-    {
-        type: "fab",
-        code: "linkedin"
-    },
-]
+import { Link } from 'react-router-dom';
+import navigationLinks from '../../utils/navigation-links';
+import socialLinks from '../../utils/social-links';
 
 const Navigation = () => {
+
+    const navLinks = navigationLinks();
+    const socLinks = socialLinks();
+
     return (
         <nav className={styles.nav}>
-            {/* styles.flexRow COMBINES nav-menu and flex-row*/}
+
             <div className={styles.navMenu}>
 
                 <div>
-                    <a href="#" className={styles.brand}>Lifestyle</a>
+                    <Link to="/" className={styles.brand}>Lifestyle</Link>
                 </div>
 
                 <div>
                     <ul className={styles.navItems}>
                         {
-                            navLinks.map((link, index) => (
+                            navLinks.map((category, index) => (
                                 <li key={index} className={styles.navLink}>
-                                    <a href="#" className={styles.navAnchor}>{link.title}</a>
+                                    <Link to={category.link} className={styles.navAnchor}>{category.title}</Link>
                                 </li>
                             ))
                         }
@@ -68,12 +33,12 @@ const Navigation = () => {
 
                 <div className={styles.social}>
                     {
-                        socialLinks.map((link, index) => (
-                            <a href="#"
+                        socLinks.map((link, index) => (
+                            <Link
                                 key={index}
                             >
                                 <FontAwesomeIcon icon={[link.type, link.code]} className={styles.navIcon}/>
-                            </a>
+                            </Link>
                         ))
                     }
                 </div>

@@ -15,7 +15,7 @@ const ArticleSingle = () => {
                 </div>
             </div>
             <div className="post-title">
-                <a href="#">Hello link</a>
+                <a href="#">Title Hello link</a>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quis sint. Nesciunt eos quam, accusamus quibusdam cum beatae mollitia eaque reprehenderit quasi totam sint, cupiditate aperiam sit blanditiis. Praesentium, fugiat.</p>
                 <button className="btn post-btn">Details</button>
             </div>
