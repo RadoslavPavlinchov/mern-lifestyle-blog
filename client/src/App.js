@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Navigation from './components/navigation';
 import Footer from './components/footer';
 import Main from './components/main/main-page';
 import Carousel from './components/main/main-carousel';
@@ -18,12 +17,8 @@ function App() {
   return (
     <div className="App">
 
-      <Navigation />
-
       <ArticleLanding />
       <Main />
-
-
 
       <ArticleContainer />
 
