@@ -14,7 +14,7 @@ const articleSchema = new Schema({
     description: {
         type: String,
         required: true,
-        maxlength: 50
+        // maxlength: 50
     },
     imageUrl: {
         type: String,
@@ -28,15 +28,15 @@ const articleSchema = new Schema({
         type: mongoose.SchemaTypes.Date,
         default: Date.now
     },
-    likes: {
-        type: Number,
-    },
-    usersLiked: [
-        {
-            type: ObjectId,
-            ref: 'User'
-        }
-    ]
+    // likes: {
+    //     type: Number,
+    // },
+    // usersLiked: [
+    //     {
+    //         type: ObjectId,
+    //         ref: 'User'
+    //     }
+    // ]
 
 });
 

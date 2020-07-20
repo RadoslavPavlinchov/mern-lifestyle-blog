@@ -2,6 +2,18 @@ const { Article, User } = require('../models');
 
 module.exports = {
     get: {
+        one: (req, res) => {
+
+        },
+
+        all: (req, res, next) => {
+            const length = req.query.length ? parseInt(req.query.length) : 20;
+
+            Article.find().limit(length)              // .populate('creator')
+                .then((articles) => res.send(articles))
+                .catch(next);
+        },
+
         create: (req, res) => {
             console.log(req)
         },
@@ -49,20 +61,32 @@ module.exports = {
     },
     post: {
         create: (req, res) => {
-            const { title, description, imageUrl } = req.body;
+            const { title, imageUrl, description } = req.body;
 
-            Article.create({ title, description, imageUrl, creator: req.user._id })
-                .then(article => {
-
-                    req.user.createdArticles.push(article._id);
-                    return User.updateOne({ _id: req.user._id }, req.user);
-
-                }).then(() => {
-
+            Article.create({ title, imageUrl, description })
+                .then((article) => {
+                    res.send(article);
                 }).catch((err) => {
                     console.log(err)
                 })
         },
+
+        // post: {
+        //     create: (req, res) => {
+        //         const { title, imageUrl } = req.body;
+
+        //         Article.create({ title, imageUrl, creator: req.user._id })
+        //             .then(article => {
+        //                 return Promise.all([
+        //                 User.updateOne({ _id }, { $push: { createdArticles: article } }),
+        //                 Article.findOne({ _id: article._id })
+        //             ]);
+        //     }).then(([modifiedObj, article]) => {
+        //         res.send(article);
+        //     }).catch((err) => {
+        //         console.log(err)
+        //     })
+        // },
 
         edit: (req, res) => {
             const { id } = req.params;

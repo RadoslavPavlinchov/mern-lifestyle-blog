@@ -52,21 +52,22 @@ module.exports = {
         register: (req, res, next) => {
             const { username, password, repeatPassword } = req.body;
 
-            if (password !== repeatPassword) {
-                res.status(400).send('Passwords do not match!');
-            }
+            // if (password !== repeatPassword) {
+            //     res.status(400).send('Passwords do not match!');
+            // }
 
             User.create({ username, password })
                 .then(registeredUser => {
-                    const token = jwt.createToken({ id: registeredUser._id });
+                    // const token = jwt.createToken({ id: registeredUser._id });
 
-                    res.cookie(cookie, token, { maxAge: 3600000 })
-                        .send(registeredUser)
+                    // res.cookie(cookie, token, { maxAge: 3600000 })
+                    return res.send(registeredUser)
 
                 }).catch((err) => {
-                    if (err.name === 'MongoError') {
-                        return;
-                    }
+                    // if (err.name === 'MongoError') {
+                    //     return;
+                    // }
+                    console.log(err)
                 })
         }
     }

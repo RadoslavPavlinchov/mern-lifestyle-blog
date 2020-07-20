@@ -1,17 +1,19 @@
 const router = require('express').Router();
 const controllers = require('../controllers');
-const auth = require('../utils/auth');
+// const auth = require('../utils/auth');
 
-router.get('/create', auth(), controllers.article.get.create);
-router.post('/create', auth(), controllers.article.post.create);
+router.get('/all', controllers.article.get.all);
 
-router.get('/details/:id', auth(), controllers.article.get.details);
+router.get('/create', controllers.article.get.create);
+router.post('/create', controllers.article.post.create);
 
-router.get('/edit/:id', auth(), controllers.article.get.edit);
-router.post('/edit/:id', auth(), controllers.article.post.edit);
+router.get('/details/:id', controllers.article.get.details);
 
-router.get('/delete/:id', auth(), controllers.article.get.delete);
+router.get('/edit/:id', controllers.article.get.edit);
+router.post('/edit/:id', controllers.article.post.edit);
 
-router.get('/like/:id', auth(), controllers.article.get.like);
+router.get('/delete/:id', controllers.article.get.delete);
+
+router.get('/like/:id', controllers.article.get.like);
 
 module.exports = router;
