@@ -6,7 +6,7 @@ import Navigation from './components/navigation';
 import ArticleContainer from './components/article/article-container';
 import NotFound from './components/notFound';
 import RegisterPage from './pages/user/register';
-import Login from './pages/user/login';
+import LoginPage from './pages/user/login';
 
 // ToDo: Make more lazy loaded components 
 const LazyArticleSingle = React.lazy(() => import('./components/article/article-single'))
@@ -21,7 +21,7 @@ const Router = () => {
                     <Route path="/article/details/:id" component={LazyArticleSingle} />
                     <Route path="/article/all" component={ArticleContainer} />
                     <Route path="/register" component={RegisterPage} />
-                    <Route path="/login" component={Login} />
+                    <Route path="/login" component={LoginPage} />
                     <Route component={NotFound} />
                 </Switch>
             </Suspense>
