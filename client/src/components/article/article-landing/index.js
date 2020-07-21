@@ -1,56 +1,67 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './index.css'
 import { Link } from 'react-router-dom';
 
-const ArticleLanding = () => {
-    return (
-        <div className="wrapper">
-            <section className="index-links">
-                <Link to="/article/details/1">
-                    <div className="index-boxlink-rectangle">
-                        <img src="https://images.unsplash.com/photo-1594253727287-dd52af55e496?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="" />
-                        <h3>Box 1</h3>
-                        <p>This is a link</p>
+class ArticleLanding extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            articles: []
+        }
+    }
+
+    getArticles = async () => {
+        // const { length } = this.props
+        const promise = await fetch(`http://localhost:8080/api/article/all`)  //const promise = await fetch(`http://localhost:8080/api/article?length=${length}`)
+        const articles = await promise.json()
+
+        this.setState({
+            articles
+        })
+    }
+
+    renderArticles() {
+        const { articles } = this.state;
+
+        return articles.map((article, index) => {
+            if (index === 0 || index === 3) {
+                return (
+                    <Link to="/article/details/1" key={index}>
+                        <div className="index-boxlink-rectangle">
+                            <img src={article.imageUrl} alt="a" />
+                            <h3>{article.title}</h3>
+                            <p>{article.description}</p>
+                        </div>
+                    </Link>
+                )
+            }
+
+            return (
+                <Link to="/article/details/1" key={index}>
+                    <div className="index-boxlink-square">
+                        <img src={article.imageUrl} alt="a" />
+                        <h3>{article.title}</h3>
+                        <p>{article.description}</p>
                     </div>
                 </Link>
-                <a href="#">
-                    <div className="index-boxlink-square">
-                        <img src="https://images.unsplash.com/photo-1594253727287-dd52af55e496?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="" />
-                        <h3>Box 2</h3>
-                        <p>This is a link</p>
-                    </div>
-                </a>
-                <a href="#">
-                    <div className="index-boxlink-square">
-                        <img src="https://images.unsplash.com/photo-1594253727287-dd52af55e496?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="" />
-                        <h3>Box 3</h3>
-                        <p>This is a link</p>
-                    </div>
-                </a>
-                <a href="#">
-                    <div className="index-boxlink-rectangle">
-                        <img src="https://images.unsplash.com/photo-1594253727287-dd52af55e496?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="" />
-                        <h3>Box 4</h3>
-                        <p>This is a link</p>
-                    </div>
-                </a>
-                <a href="#">
-                    <div className="index-boxlink-square">
-                        <img src="https://images.unsplash.com/photo-1594253727287-dd52af55e496?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="" />
-                        <h3>Box 5</h3>
-                        <p>This is a link</p>
-                    </div>
-                </a>
-                <a href="#">
-                    <div className="index-boxlink-square">
-                        <img src="https://images.unsplash.com/photo-1594253727287-dd52af55e496?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="" />
-                        <h3>Box 6</h3>
-                        <p>This is a link</p>
-                    </div>
-                </a>
-            </section>
-        </div>
-    )
+            )
+        })
+    }
+
+    componentDidMount() {
+        this.getArticles();
+    }
+
+    render() {
+        return (
+            <div className="wrapper">
+                <section className="index-links">
+                    {this.renderArticles()}
+                </section>
+            </div>
+        )
+    }
 }
 
 export default ArticleLanding;
