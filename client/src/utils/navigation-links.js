@@ -1,4 +1,4 @@
-const navigationLinks = () => {
+const navigationLinks = (id) => {
 
     const links = [
         {
@@ -23,7 +23,7 @@ const navigationLinks = () => {
         },
         {
             title: 'Profile',
-            link: '/profile'
+            link: `/profile/${id}`
         }
     ];
 
