@@ -25,6 +25,14 @@ module.exports = {
                         .send('Logout successfully!');
                 })
                 .catch(next);
+        },
+        profile: (req, res, next) => {
+            User.findById(req.query.id)
+                .then((user) => res.send(user))
+                .catch(err => {
+                    res.status(500)
+                        .send(err)
+                })
         }
     },
     post: {
