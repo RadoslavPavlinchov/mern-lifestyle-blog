@@ -7,7 +7,8 @@ import socialLinks from '../../utils/social-links';
 
 const Navigation = () => {
 
-    const navLinks = navigationLinks();
+    // Hard coded an Id to display the Profile Page
+    const navLinks = navigationLinks('5f1459936423133e9c647736');
     const socLinks = socialLinks();
 
     return (
