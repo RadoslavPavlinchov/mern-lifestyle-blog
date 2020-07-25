@@ -35,12 +35,13 @@ class RegisterPage extends Component {
 
         const { emailError, passwordError, rePasswordError } = this.state
 
-        if (emailError, passwordError, rePasswordError) {
+        if (emailError || passwordError || rePasswordError) {
             console.log('There is an error')
             return;
         }
 
         console.log('Hello, you are in')
+        this.props.history.push('/')
         // fetch().then().catch()
     }
 
