@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './index.module.css';
 import Input from '../../../components/input';
+import authenticate from '../../../utils/authenticate';
 
 class RegisterPage extends Component {
 
@@ -8,10 +9,10 @@ class RegisterPage extends Component {
         super(props);
 
         this.state = {
-            email: '',
+            username: '',
             password: '',
             rePassword: '',
-            emailError: false,
+            usernameError: false,
             passwordError: false,
             rePasswordError: false,
             submitBtnDisabled: true
@@ -23,40 +24,91 @@ class RegisterPage extends Component {
         newState[type] = event.target.value;
         this.setState(newState);
 
-        if (this.state.email !== '' && this.state.password !== '' && this.state.rePassword !== '') {
+        if (this.state.username !== '' && this.state.password !== '' && this.state.rePassword !== '') {
             this.setState({
                 submitBtnDisabled: false
             })
         }
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault()
 
-        const { emailError, passwordError, rePasswordError } = this.state
+        const { 
+            usernameError, 
+            passwordError, 
+            rePasswordError, 
+            username, 
+            password, 
+            rePassword 
+        } = this.state;
 
-        if (emailError || passwordError || rePasswordError) {
+        if (usernameError || passwordError || rePasswordError) {
             console.log('There is an error')
             return;
         }
 
-        console.log('Hello, you are in')
-        this.props.history.push('/')
-        // fetch().then().catch()
+        authenticate('http://localhost:8080/api/user/register', {
+            username,
+            password,
+            rePassword
+        }, () => {
+            console.log('You are logged in');
+            this.props.history.push('/')
+        }, (err) => {
+            console.log(err)
+        });
+
+        // try {
+
+        //     const promise = await fetch('http://localhost:8080/api/user/register', {
+        //         method: 'POST',
+        //         body: JSON.stringify({
+        //             username,
+        //             password,
+        //             rePassword
+        //         }),
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         }
+        //     })
+
+        //     const authToken = promise.headers.get('Authorization');
+        //     document.cookie = `x-auth-token=${authToken}`;
+
+        //     const response = await promise.json();
+
+        //     if (response.username && authToken) {
+        //         this.props.history.push('/')
+        //     }
+
+        // } catch (error) {
+        //     console.log(error)
+        // }
     }
 
-    handleEmailBlur = () => {
-        if (!this.state.email.includes('@')) {
+    handleUsernameBlur = () => {
+        // if (!this.state.username.includes('@')) {
+        //     this.setState({
+        //         usernameError: true
+        //     })
+        // } else if (this.state.usernameError) {
+        //     this.setState({
+        //         usernameError: false
+        //     })
+        // }
+
+        const { username } = this.state;
+
+        if (username.length < 3) {
             this.setState({
-                emailError: true
+                usernameError: true
             })
-        } else if (this.state.emailError) {
+        } else if (this.state.usernameError) {
             this.setState({
-                emailError: false
+                usernameError: false
             })
         }
-
-        // Add the validation
     }
 
     handlePasswordBlur = () => {
@@ -74,7 +126,7 @@ class RegisterPage extends Component {
 
     handleRePasswordBlur = () => {
         const { password, rePassword } = this.state
-        if(password !== rePassword) {
+        if (password !== rePassword) {
             this.setState({
                 rePasswordError: true
             })
@@ -87,10 +139,10 @@ class RegisterPage extends Component {
 
     render() {
         const {
-            email,
+            username,
             password,
             rePassword,
-            emailError,
+            usernameError,
             passwordError,
             rePasswordError,
             submitBtnDisabled
@@ -106,16 +158,17 @@ class RegisterPage extends Component {
                         <form onSubmit={this.handleSubmit}>
 
                             <Input
-                                id='email'
-                                label='Email'
-                                type='email'
-                                onChange={(event) => { this.onChange(event, 'email') }}
-                                onBlur={this.handleEmailBlur}
-                                value={email}
-                                error={emailError}
+                                id='username'
+                                label='username'
+                                type='text'
+                                onChange={(event) => { this.onChange(event, 'username') }}
+                                onBlur={this.handleUsernameBlur}
+                                value={username}
+                                error={usernameError}
                             />
 
-                            {emailError ? (<span className={styles.err}>This is not a valid email!</span>) : null}
+                            {/* {usernameError ? (<span className={styles.err}>This is not a valid username!</span>) : null} */}
+                            {usernameError ? (<span className={styles.err}>The username should be at least 3 characters!</span>) : null}
 
                             <Input
                                 id='password'
