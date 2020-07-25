@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './index.module.css';
 import Input from '../../../components/input';
+import authenticate from '../../../utils/authenticate';
 
 class LoginPage extends Component {
 
@@ -8,7 +9,7 @@ class LoginPage extends Component {
         super(props);
 
         this.state = {
-            email: '',
+            username: '',
             password: ''
         }
     }
@@ -19,15 +20,51 @@ class LoginPage extends Component {
         this.setState(newState);
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(this.state)
+        const { username, password } = this.state;
 
-        // fetch().then().catch()
+        authenticate('http://localhost:8080/api/user/login', {
+            username,
+            password
+        }, () => {
+            console.log('You are logged in');
+            this.props.history.push('/')
+        }, (err) => {
+            console.log(err)
+        });
+
+        // try {
+
+        //     const promise = await fetch('http://localhost:8080/api/user/login', {
+        //         method: 'POST',
+        //         body: JSON.stringify({
+        //             username,
+        //             password
+        //         }),
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         }
+        //     })
+
+        //     const authToken = promise.headers.get('Authorization');
+        //     document.cookie = `x-auth-token=${authToken}`;
+
+        //     const response = await promise.json();
+
+        //     if (response.username && authToken) {
+        //         this.props.history.push('/')
+        //     }
+
+        // } catch (error) {
+        //     console.log(error)
+        // }
+
+
     }
 
     render() {
-        const { email, password } = this.state;
+        const { username, password } = this.state;
 
         return (
             <div className={styles.total}>
@@ -37,11 +74,11 @@ class LoginPage extends Component {
 
                         <form onSubmit={this.handleSubmit}>
                             <Input
-                                id='email'
-                                label='Email'
-                                type='email'
-                                onChange={(e) => { this.onChange(e, 'email') }}
-                                value={email}
+                                id='username'
+                                label='Username'
+                                type='text'
+                                onChange={(e) => { this.onChange(e, 'username') }}
+                                value={username}
                             />
                             <Input
                                 id='password'

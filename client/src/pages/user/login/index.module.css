@@ -26,8 +26,6 @@ input, button {
     border: 1px solid rgb(202, 202, 202);
 }
 
-/* Start deleting */
-
 .form {
     position: relative;
     width: 640px;
@@ -66,7 +64,7 @@ input {
     text-align: center;
 }
 
-button {
+.submit {
     display: block;
     margin: 0 auto;
     width: 260px;
@@ -75,9 +73,6 @@ button {
     color: #fff;
     font-size: 15px;
     cursor: pointer;
-}
-
-.submit {
     margin-top: 40px;
     margin-bottom: 30px;
     text-transform: uppercase;

@@ -5,17 +5,17 @@ const { cookie } = require('../config/config');
 
 module.exports = {
     get: {
-        login: (req, res, next) => {
-            console.log('Login page')
-            return;
-            // User.find()
-            //     .then((users) => res.send(users))
-            //     .catch(next)
-        },
-        register: (req, res, next) => {
-            console.log('Register page')
-            return;
-        },
+        // login: (req, res, next) => {
+        //     console.log('Login page')
+        //     return;
+        //     // User.find()
+        //     //     .then((users) => res.send(users))
+        //     //     .catch(next)
+        // },
+        // register: (req, res, next) => {
+        //     console.log('Register page')
+        //     return;
+        // },
         logout: (req, res, next) => {
             const token = req.cookies[cookie];
 
@@ -49,8 +49,9 @@ module.exports = {
                             }
                             const token = jwt.createToken({ id: user._id });
 
-                            res.cookie(cookie, token, { maxAge: 3600000 })
-                                .send(user)
+                            // res.cookie(cookie, token, { maxAge: 3600000 })
+                            res.header('Authorization', token)
+                                .send(user);
                         })
                         .catch(err => {
                             console.log(err)
@@ -58,23 +59,21 @@ module.exports = {
                 })
         },
         register: (req, res, next) => {
-            const { username, password, repeatPassword } = req.body;
+            const { username, password, rePassword } = req.body;
 
-            // if (password !== repeatPassword) {
-            //     res.status(400).send('Passwords do not match!');
-            // }
+            if (password !== rePassword) {
+                res.status(400).send('Passwords do not match!');
+            }
 
             User.create({ username, password })
                 .then(registeredUser => {
-                    // const token = jwt.createToken({ id: registeredUser._id });
+                    const token = jwt.createToken({ id: registeredUser._id });
 
                     // res.cookie(cookie, token, { maxAge: 3600000 })
-                    return res.send(registeredUser)
+                    res.header('Authorization', token)
+                        .send(registeredUser)
 
                 }).catch((err) => {
-                    // if (err.name === 'MongoError') {
-                    //     return;
-                    // }
                     console.log(err)
                 })
         }

@@ -4,8 +4,8 @@ const controllers = require('../controllers');
 
 router.get('/profile', controllers.user.get.profile);
 
-router.get('/login', controllers.user.get.login);
-router.get('/register', controllers.user.get.register);
+// router.get('/login', controllers.user.get.login);
+// router.get('/register', controllers.user.get.register);
 
 router.get('/logout', controllers.user.get.logout);
 
