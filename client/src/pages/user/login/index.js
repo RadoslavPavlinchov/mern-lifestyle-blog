@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from './index.module.css';
 import Input from '../../../components/input';
 import authenticate from '../../../utils/authenticate';
+import UserContext from '../../../Context';
 
 class LoginPage extends Component {
 
@@ -14,6 +15,8 @@ class LoginPage extends Component {
         }
     }
 
+    static contextType = UserContext;
+
     onChange = (event, type) => {
         const newState = {};
         newState[type] = event.target.value;
@@ -24,14 +27,18 @@ class LoginPage extends Component {
         e.preventDefault()
         const { username, password } = this.state;
 
+        console.log(this.context)
+
         authenticate('http://localhost:8080/api/user/login', {
             username,
             password
-        }, () => {
+        }, (user) => {
             console.log('You are logged in');
-            this.props.history.push('/')
+            
+            this.context.login(user);
+            this.props.history.push('/');
         }, (err) => {
-            console.log(err)
+            console.log(err);
         });
 
         // try {

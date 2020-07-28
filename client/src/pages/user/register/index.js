@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from './index.module.css';
 import Input from '../../../components/input';
 import authenticate from '../../../utils/authenticate';
+import UserContext from '../../../Context';
 
 class RegisterPage extends Component {
 
@@ -18,6 +19,8 @@ class RegisterPage extends Component {
             submitBtnDisabled: true
         }
     }
+
+    static contextType = UserContext;
 
     onChange = (event, type) => {
         const newState = {};
@@ -52,8 +55,10 @@ class RegisterPage extends Component {
             username,
             password,
             rePassword
-        }, () => {
+        }, (user) => {
             console.log('You are logged in');
+
+            this.context.login(user);
             this.props.history.push('/')
         }, (err) => {
             console.log(err)

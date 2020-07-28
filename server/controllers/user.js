@@ -76,6 +76,31 @@ module.exports = {
                 }).catch((err) => {
                     console.log(err)
                 })
+        },
+        verifyLogin: (req, res, next) => {
+            const token = req.body.token || '';
+
+            jwt.verifyToken(token)
+                .then((data) => {
+                User.findById(data.id).then(user => {
+                    res.send({
+                        status: true,
+                        user
+                    })
+                    // req.user = user;
+                    // next();
+                });
+            }).catch(err => {
+                if (!redirectUnauthenticated) { 
+                    next(); 
+                    return; 
+                }
+                // res.redirect('/user/login')
+                // next(err);
+                res.send({
+                    status: false
+                })
+            });
         }
     }
 }
