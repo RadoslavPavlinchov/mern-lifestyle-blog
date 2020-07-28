@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import UserContext from '../../Context';
 
 class ProfilePage extends Component {
 
@@ -10,6 +11,8 @@ class ProfilePage extends Component {
             articles: null
         }
     }
+
+    static contextType = UserContext;
 
     componentDidMount() {
         this.getUser(this.props.match.params.id)
@@ -29,6 +32,11 @@ class ProfilePage extends Component {
         })
     }
 
+    logout = () => {
+        this.context.logout();
+        this.props.history.push('/')
+    }
+
     render() {
         const { username, articles } = this.state;
 
@@ -42,6 +50,7 @@ class ProfilePage extends Component {
             <div>
                 <p>Username: {username}</p>
                 <p>Articles: {articles}</p>
+                <button onClick={this.logout}>Logout</button>
             </div>
         )
     }
