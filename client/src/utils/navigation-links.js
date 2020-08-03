@@ -24,11 +24,11 @@ const navigationLinks = (loggedIn, user) => {
         {
             title: 'Profile',
             link: `/profile/${user && user.id}`
+        },
+        {
+            title: 'Admin',
+            link: '/admin'
         }
-        // {
-        //     title: 'Logout',
-        //     link: '/logout'
-        // }
     ];
 
     const guestLinks = [
