@@ -11,14 +11,17 @@ const articleSchema = new Schema({
         required: true,
         unique: true,
     },
-    description: {
+    article: {
         type: String,
         required: true,
         // maxlength: 50
     },
-    imageUrl: {
+    image: {
         type: String,
         required: true
+    },
+    category: {
+        type: String
     },
     creator: {
         type: ObjectId,
@@ -28,16 +31,12 @@ const articleSchema = new Schema({
         type: mongoose.SchemaTypes.Date,
         default: Date.now
     },
-    // likes: {
-    //     type: Number,
-    // },
-    // usersLiked: [
-    //     {
-    //         type: ObjectId,
-    //         ref: 'User'
-    //     }
-    // ]
-
+    likes: {
+        type: Number,
+    },
+    comments: {
+        type: String
+    }
 });
 
 module.exports = new Model('Article', articleSchema);

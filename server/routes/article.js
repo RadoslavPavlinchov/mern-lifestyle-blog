@@ -4,7 +4,7 @@ const controllers = require('../controllers');
 
 router.get('/all', controllers.article.get.all);
 
-router.get('/create', controllers.article.get.create);
+// router.get('/create', controllers.article.get.create);
 router.post('/create', controllers.article.post.create);
 
 router.get('/details/:id', controllers.article.get.details);
