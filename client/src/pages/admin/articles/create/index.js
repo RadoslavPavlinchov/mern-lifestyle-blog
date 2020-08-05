@@ -1,8 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './index.module.css'
 import { Link } from 'react-router-dom';
+import Input from '../../../../components/input';
+import TextArea from '../../../../components/textarea';
+import SubmitButton from '../../../../components/submit-btn'
 
 const CreateArticle = () => {
+
+    const [title, setTitle] = useState('')
+    const [article, setArticle] = useState('');
+    const [image, setImage] = useState('');
+    const [category, setCategory] = useState('');
+    // const [updatedOrigami, setUpdatedOrigami] = useState([])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        await fetch('http://localhost:8080/api/article/create', {
+            method: 'POST',
+            body: JSON.stringify({
+                title,
+                article,
+                image,
+                category
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization': getCookie('x-auth-token')
+            }
+        })
+
+        setTitle('');
+        setArticle('');
+        setImage('');
+        setCategory('')
+    }
+
     return (
         <div className={styles['admin-wrapper']}>
 
@@ -20,33 +53,48 @@ const CreateArticle = () => {
                     <h2 className={styles['page-title']}>Create Article</h2>
 
                     <form>
-                        <div>
-                            <label>Title</label>
-                            <input type="text" name="title" className={styles['text-input']} />
-                        </div>
+                        <Input
+                            id='title'
+                            label='Title'
+                            type='text'
+                            onChange={e => setTitle(e.target.value)}
+                            value={title}
+                        />
 
-                        <div>
-                            <label>Details</label>
-                            <textarea name="body" id="body" cols="50" rows="10"></textarea>
-                        </div>
+                        <label htmlFor="article">Article</label>
+                        <TextArea id="article" name="article" value={article} onChange={e => setArticle(e.target.value)} />
 
-                        <div>
+                        {/* <div>
                             <label>Image</label>
                             <input type="file" name="image" className={styles['text-input']} />
-                        </div>
+                        </div> */}
 
-                        <div>
+                        <Input
+                            id='image'
+                            label='Image'
+                            type='text'
+                            onChange={e => setImage(e.target.value)}
+                            value={image}
+                        />
+
+                        {/* <div>
                             <label>Category</label>
                             <select name="category" className={styles['text-input']}>
                                 <option value="Life">Life</option>
                                 <option value="Tech">Tech</option>
                                 <option value="Hiking">Hiking</option>
                             </select>
-                        </div>
+                        </div> */}
 
-                        <div>
-                            <button type="submit" className={styles['btn-big']}>Create Article</button>
-                        </div>
+                        <Input
+                            id='category'
+                            label='Category'
+                            type='text'
+                            onChange={e => setCategory(e.target.value)}
+                            value={category}
+                        />
+
+                        <SubmitButton title="Create" onClick={handleSubmit} />
 
                     </form>
 

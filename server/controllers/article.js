@@ -61,9 +61,14 @@ module.exports = {
     },
     post: {
         create: (req, res) => {
-            const { title, imageUrl, description } = req.body;
+            const {
+                title,
+                article,
+                image,
+                category 
+            } = req.body;
 
-            Article.create({ title, imageUrl, description })
+            Article.create({ title, article, image, category })
                 .then((article) => {
                     res.send(article);
                 }).catch((err) => {
