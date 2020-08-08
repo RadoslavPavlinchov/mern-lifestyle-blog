@@ -1,4 +1,4 @@
-const navigationLinks = (loggedIn, user) => {
+const navigationLinks = (user) => {
 
     const authLinks = [
         {
@@ -57,6 +57,8 @@ const navigationLinks = (loggedIn, user) => {
         //     link: `/profile/${id}`
         // }
     ];
+
+    const loggedIn = user && user.loggedIn
 
     return loggedIn ? authLinks : guestLinks;
 }

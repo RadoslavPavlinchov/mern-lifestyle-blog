@@ -33,6 +33,7 @@ const articleSchema = new Schema({
     },
     likes: {
         type: Number,
+        default: 0
     },
     comments: {
         type: String

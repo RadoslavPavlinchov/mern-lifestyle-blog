@@ -33,7 +33,10 @@ const userSchema = new Schema({
       type: ObjectId,
       ref: 'Article'
     }
-  ]
+  ],
+  comments: {
+    type: String
+  }
 });
 
 userSchema.methods = {
