@@ -15,10 +15,12 @@ import CreateCategory from './pages/admin/categories/create';
 import ManageUsers from './pages/admin/users/landing';
 import CreateUser from './pages/admin/users/create';
 import ManageArticles from './pages/admin/articles/landing';
+import EditArticle from './pages/admin/articles/edit';
+import ArticleDetails from './components/article/article-details';
 // import ErrorPage from './components/error';
 
 // ToDo: Make more lazy loaded components 
-const LazyArticleSingle = React.lazy(() => import('./components/article/article-single'))
+// const LazyArticleSingle = React.lazy(() => import('./components/article/article-single'))
 
 const Router = () => {
     return (
@@ -28,7 +30,8 @@ const Router = () => {
             <Suspense fallback={<div>Loading...</div>}>
                 <Switch>
                     <Route path="/" exact component={App} />
-                    <Route path="/article/details/:id" component={LazyArticleSingle} />
+                    {/* <Route path="/article/details/:id" component={LazyArticleSingle} /> */}
+                    <Route path="/article/details/:id" component={ArticleDetails} />
                     <Route path="/article/all" component={ArticleContainer} />
                     <Route path="/register" component={RegisterPage} />
                     <Route path="/login" component={LoginPage} />
@@ -37,6 +40,7 @@ const Router = () => {
                     <Route path="/admin/articles" component={ManageArticles} />
                     <Route path="/admin/users" component={ManageUsers} />
                     <Route path="/admin/article/create" component={CreateArticle} />
+                    <Route path="/article/edit/:id" component={EditArticle} />
                     <Route path="/admin/category/create" component={CreateCategory} />
                     <Route path="/admin/user/create" component={CreateUser} />
                     <Route path="/admin/categories" component={ManageCategories} />

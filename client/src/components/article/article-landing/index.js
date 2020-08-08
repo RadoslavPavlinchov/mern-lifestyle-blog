@@ -27,9 +27,11 @@ class ArticleLanding extends Component {
         return articles.map((article, index) => {
             if (index === 0 || index === 3) {
                 return (
-                    <Link to="/article/details/1" key={index}>
+                    <Link to={{
+                        pathname: `/article/details/${article._id}`
+                    }} key={index}>
                         <div className="index-boxlink-rectangle">
-                            <img src={article.imageUrl} alt="a" />
+                            <img src={article.image} alt="a" />
                             <h3>{article.title}</h3>
                             <p>{article.description}</p>
                         </div>
@@ -38,9 +40,11 @@ class ArticleLanding extends Component {
             }
 
             return (
-                <Link to="/article/details/1" key={index}>
+                <Link to={{
+                    pathname: `/article/details/${article._id}`
+                }} key={index}>
                     <div className="index-boxlink-square">
-                        <img src={article.imageUrl} alt="a" />
+                        <img src={article.image} alt="a" />
                         <h3>{article.title}</h3>
                         <p>{article.description}</p>
                     </div>

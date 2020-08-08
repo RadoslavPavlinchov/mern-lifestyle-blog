@@ -15,9 +15,9 @@ class Navigation extends Component {
 
         const socLinks = socialLinks();
 
-        const { loggedIn, user } = this.context;
+        const { user } = this.context;
 
-        const navLinks = navigationLinks(loggedIn, user);
+        const navLinks = navigationLinks(user);
 
         return (
             <nav className={styles.nav}>
@@ -45,7 +45,7 @@ class Navigation extends Component {
                     <div className={styles.social}>
                         {
                             socLinks.map((link, index) => (
-                                <Link
+                                <Link to='/'
                                     key={index}
                                 >
                                     <FontAwesomeIcon icon={[link.type, link.code]} className={styles.navIcon} />

@@ -9,7 +9,7 @@ router.get('/profile', controllers.user.get.profile);
 
 router.get('/logout', controllers.user.get.logout);
 
-router.post('/verify', controllers.user.post.verifyLogin);
+router.get('/verify', controllers.user.post.verifyLogin);
 
 router.post('/login', controllers.user.post.login);
 router.post('/register', controllers.user.post.register);

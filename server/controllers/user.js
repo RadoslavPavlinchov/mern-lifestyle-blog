@@ -71,36 +71,41 @@ module.exports = {
 
                     // res.cookie(cookie, token, { maxAge: 3600000 })
                     res.header('Authorization', token)
-                        .send(registeredUser)
+                        .send(registeredUser);
 
                 }).catch((err) => {
                     console.log(err)
                 })
         },
         verifyLogin: (req, res, next) => {
-            const token = req.body.token || '';
+
+            const token = req.headers.authorization || '';
 
             jwt.verifyToken(token)
                 .then((data) => {
-                User.findById(data.id).then(user => {
+                    User.findById(data.id).then(user => {
+                            res.send({
+                                status: true,
+                                user
+                            })
+                            // req.user = user;
+                            // next();
+                        });
+                }).catch(err => {
+                    // if (!redirectUnauthenticated) {
+                    //     next();
+                    //     return;
+                    // }
+                    if (['token expired', 'blacklisted token', 'jwt must be provided'].includes(err.message)) {
+                        res.status(401).send('UNAUTHORIZED!');
+                        return;
+                    }
+                    // res.redirect('/user/login')
+                    // next(err);
                     res.send({
-                        status: true,
-                        user
+                        status: false
                     })
-                    // req.user = user;
-                    // next();
                 });
-            }).catch(err => {
-                if (!redirectUnauthenticated) { 
-                    next(); 
-                    return; 
-                }
-                // res.redirect('/user/login')
-                // next(err);
-                res.send({
-                    status: false
-                })
-            });
         }
     }
 }

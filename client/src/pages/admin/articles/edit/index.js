@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './index.module.css'
 import { Link } from 'react-router-dom';
 import Input from '../../../../components/input';
@@ -6,19 +6,36 @@ import TextArea from '../../../../components/textarea';
 import SubmitButton from '../../../../components/submit-btn'
 import getCookie from '../../../../utils/getCookie';
 
-const CreateArticle = () => {
+const EditArticle = (props) => {
 
     const [title, setTitle] = useState('')
     const [article, setArticle] = useState('');
     const [image, setImage] = useState('');
     const [category, setCategory] = useState('');
-    // const [updatedOrigami, setUpdatedOrigami] = useState([])
+    const [message, setMessage] = useState('')
+
+    useEffect(() => {
+        fetch(`http://localhost:8080/api/article/edit/${props.match.params.id}`)
+            .then((article) => {
+                return article.json();
+            })
+            .then((article) => {
+                setTitle(article.title);
+                setArticle(article.article)
+                setImage(article.image)
+                setCategory(article.category)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [])
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await fetch('http://localhost:8080/api/article/create', {
-            method: 'POST',
+        await fetch(`http://localhost:8080/api/article/edit/${props.match.params.id}`, {
+            method: 'PUT',
             body: JSON.stringify({
                 title,
                 article,
@@ -29,15 +46,17 @@ const CreateArticle = () => {
                 'Content-Type': 'application/json',
                 'Authorization': getCookie('x-auth-token')
             }
-        })
-        .then(() => {
-            alert('The article has been deleted successfully!')
+        }).then((res) => {
+            console.log('Success',res)
+            setMessage(res);
+        }).catch(err => {
+            console.log(err)
         })
 
-        setTitle('');
-        setArticle('');
-        setImage('');
-        setCategory('')
+        setTitle(title);
+        setArticle(article);
+        setImage(image);
+        setCategory(category)
     }
 
     return (
@@ -54,7 +73,8 @@ const CreateArticle = () => {
             <div className={styles['admin-content']}>
 
                 <div className={styles.content}>
-                    <h2 className={styles['page-title']}>Create Article</h2>
+                    <span className={styles.message}>{message}</span>
+                    <h2 className={styles['page-title']}>Edit Article</h2>
 
                     <form>
                         <Input
@@ -98,7 +118,7 @@ const CreateArticle = () => {
                             value={category}
                         />
 
-                        <SubmitButton title="Create" onClick={handleSubmit} />
+                        <SubmitButton title="Edit" onClick={handleSubmit} />
 
                     </form>
 
@@ -110,4 +130,4 @@ const CreateArticle = () => {
     )
 }
 
-export default CreateArticle;
+export default EditArticle;

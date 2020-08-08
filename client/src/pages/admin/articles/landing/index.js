@@ -1,8 +1,48 @@
-import React from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import styles from './index.module.css';
 import { Link } from 'react-router-dom';
+import _getArticles from '../../../../utils/getArticles';
 
 const ManageArticles = () => {
+    const [articles, setArticles] = useState([]);
+
+    const deleteArticle = (id) => {
+        fetch(`http://localhost:8080/api/article/delete/${id}`)
+            .then(() => {
+                alert('The article has been deleted successfully!')
+                setArticles(articles.filter(x => x._id !== id))
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    const getArticles = useCallback(async () => {
+        const articles = await _getArticles();
+        setArticles(articles);
+    }, []);
+
+    const renderArticles = () => {
+        return articles.map((article, index) => {
+            return (
+                <tr>
+                    <td>{index + 1}</td>
+                    <td>{article.title}</td>
+                    <td>{article.creator.username}</td>
+                    <td><Link to={{
+                        pathname: `/article/edit/${article._id}`
+                    }} className={styles.edit}>Edit</Link></td>
+                    <td><Link to="#" onClick={() => deleteArticle(article._id)} className={styles.delete}>Delete</Link></td>
+                    <td><Link to="#" className={styles.publish}>Publish</Link></td>
+                </tr>
+            )
+        })
+    }
+
+    useEffect(() => {
+        getArticles();
+    }, [getArticles])
+
     return (
         <div className={styles['admin-wrapper']}>
 
@@ -32,23 +72,7 @@ const ManageArticles = () => {
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>This is the first article</td>
-                                <td>Radoslav Pavlinchov</td>
-                                <td><Link to="/" className={styles.edit}>Edit</Link></td>
-                                <td><Link to="/" className={styles.delete}>Delete</Link></td>
-                                <td><Link to="/" className={styles.publish}>Publish</Link></td>
-                            </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td>This is the second article</td>
-                                <td>Hancho Hanchovski</td>
-                                <td><Link to="/" className={styles.edit}>Edit</Link></td>
-                                <td><Link to="/" className={styles.delete}>Delete</Link></td>
-                                <td><Link to="/" className={styles.publish}>Publish</Link></td>
-                            </tr>
+                            {renderArticles()}
                         </tbody>
 
                     </table>
