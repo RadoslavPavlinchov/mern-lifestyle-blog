@@ -6,6 +6,7 @@ import navigationLinks from '../../utils/navigation-links';
 import socialLinks from '../../utils/social-links';
 import UserContext from '../../Context';
 
+
 class Navigation extends Component {
 
     static contextType = UserContext;
@@ -32,7 +33,7 @@ class Navigation extends Component {
                         <ul className={styles.navItems}>
                             {
                                 navLinks.map((category, index) => (
-                                    <li key={index} className={styles.navLink}>
+                                    <li key={index} className={styles.navLink} data-test-id={`link-${category.title}`}>
                                         <Link to={category.link} className={styles.navAnchor}>{category.title}</Link>
                                     </li>
                                 ))
