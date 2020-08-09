@@ -6,6 +6,8 @@ import Carousel from './components/main/main-carousel';
 import ArticleContainer from './components/article/article-container';
 import ArticleLanding from './components/article/article-landing';
 import UserContext from './Context';
+import ErrorBoundary from './ErrorBoundary';
+
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebook, faTwitter, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -20,7 +22,10 @@ class App extends Component {
     return (
       <div className="App">
 
-        <ArticleLanding />
+        <ErrorBoundary>
+          <ArticleLanding />
+        </ErrorBoundary>
+
         <Main />
 
         <ArticleContainer />

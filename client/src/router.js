@@ -46,8 +46,8 @@ const Router = () => {
                     </Route>
 
                     <Route path="/profile/:id" component={ProfilePage} />
-{/* 
-                    <Route path="/profile/:id">
+
+                    {/* <Route path="/profile/:id">
                         {loggedIn ? (<ProfilePage />) : (<Redirect to='/login' />)} 
                     </Route> */}
 
