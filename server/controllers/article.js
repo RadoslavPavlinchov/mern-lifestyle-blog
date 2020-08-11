@@ -22,6 +22,7 @@ module.exports = {
             const id = req.params.id
             Article.findById(id).populate('creator')
                 .then(article => {
+                    console.log(article)
                     res.send(article)
                 }).catch(err => {
                     console.log(err);
@@ -53,12 +54,28 @@ module.exports = {
             const { id } = req.params;
             const { _id } = req.user;
 
-            Promise.all([
-                Article.updateOne({ _id: id }, { $push: { usersLiked: _id } }),
-                User.updateOne({ _id }, { $push: { likedArticles: id } })
-            ]).then(() => {
+            Article.findByIdAndUpdate(id, { $push: { likes: _id } }, { new: true })
+                .then((result) => {
+                    res.send(result)
+                    console.log('liked !!!')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
 
-            })
+        unlike: (req, res) => {
+            const { id } = req.params;
+            const { _id } = req.user;
+
+            Article.findByIdAndUpdate(id, { $pull: { likes: _id } }, { new: true })
+                .then((result) => {
+                    res.send(result)
+                    console.log('unliked !!!')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         },
     },
     post: {
