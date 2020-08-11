@@ -14,7 +14,6 @@ const articleSchema = new Schema({
     article: {
         type: String,
         required: true,
-        // maxlength: 50
     },
     image: {
         type: String,
@@ -31,13 +30,25 @@ const articleSchema = new Schema({
         type: mongoose.SchemaTypes.Date,
         default: Date.now
     },
-    likes: {
-        type: Number,
-        default: 0
-    },
-    comments: {
-        type: String
-    }
+    likes: [
+        {
+            type: ObjectId,
+            ref: 'User'
+        }
+    ],
+    comments: [
+        {
+            text: String,
+            createdAt: {
+                type: mongoose.SchemaTypes.Date,
+                default: Date.now
+            },
+            createdBy: {
+                type:ObjectId,
+                ref: 'User'
+            }
+        }
+    ]
 });
 
 module.exports = new Model('Article', articleSchema);

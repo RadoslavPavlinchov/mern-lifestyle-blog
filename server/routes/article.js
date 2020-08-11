@@ -15,6 +15,10 @@ router.put('/edit/:id', controllers.article.post.edit)
 
 router.get('/delete/:id', controllers.article.get.delete);
 
-router.get('/like/:id', controllers.article.get.like);
+router.put('/like/:id', auth(), controllers.article.get.like);
+router.put('/unlike/:id', auth(), controllers.article.get.unlike);
+
+// Add comments later on
+// router.get('/comment/:id', controllers.article.get.comment);
 
 module.exports = router;

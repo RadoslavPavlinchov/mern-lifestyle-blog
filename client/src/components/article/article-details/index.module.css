@@ -38,3 +38,42 @@
     font-size: 1.5rem;
 }
 
+.like {
+    color: red;
+
+    animation: like 0.5s linear;
+}
+@keyframes like{
+    0% {
+        transform: rotate(0deg) scale(1.7);
+    }
+    40% {
+        transform: rotate(0deg) scale(1);
+    }
+    41% {
+        transform: rotate(360deg) scale(1);
+    }
+    100% {
+        transform: rotate(0deg) scale(1.7);
+    }
+}
+
+.unlike {
+    color: #00000090;
+}
+
+.positionLike {
+    background: white;
+    border: 2px solid #000; 
+    padding: 2rem;
+    position: absolute;
+    bottom: 75%;
+    left: 18vw;
+    border-radius: 2rem;
+
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;
+}
+
+
