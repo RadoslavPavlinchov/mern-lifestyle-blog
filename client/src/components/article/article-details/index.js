@@ -3,6 +3,7 @@ import styles from './index.module.css';
 import getCookie from '../../../utils/getCookie';
 import UserContext from '../../../Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Comments from '../../comments';
 
 const ArticleDetails = (props) => {
 
@@ -16,9 +17,15 @@ const ArticleDetails = (props) => {
     const [likeCount, setLikeCount] = useState(null);
     const [like, setLike] = useState(false);
 
-    const [active, setActive] = useState(false)
+    const [active, setActive] = useState(false);
+
+    const [comments, setComments] = useState([]);
 
     const context = useContext(UserContext);
+
+    const updateComments = (comments) => {
+        setComments({comments: comments})
+    }
 
     const toggleLikeColor = () => {
         setActive(!active)
@@ -36,8 +43,8 @@ const ArticleDetails = (props) => {
                 'Content-Type': 'application/json',
                 'Authorization': getCookie('x-auth-token')
             }
-        }).then((response) => {
-            console.log('liked !!!', response)
+        }).then(() => {
+            console.log('liked !!!')
         }).catch((err) => {
             console.log(err)
         })
@@ -50,8 +57,8 @@ const ArticleDetails = (props) => {
                 'Content-Type': 'application/json',
                 'Authorization': getCookie('x-auth-token')
             }
-        }).then((response) => {
-            console.log('unliked !!!', response)
+        }).then(() => {
+            console.log('unliked !!!')
         }).catch((err) => {
             console.log(err)
         })
@@ -82,13 +89,15 @@ const ArticleDetails = (props) => {
                 setCreator(article.creator);
                 setCreatedAt(article.createdAt);
 
-                setLikeCount(article.likes.length)
-                setLike(checkLike(article))
-                setActive(checkLike(article))
+                setLikeCount(article.likes.length);
+                setLike(checkLike(article));
+                setActive(checkLike(article));
+
+                setComments(article.comments);
             })
 
 
-    }, [like])
+    }, [like, comments])
 
     return (
         <div className={styles['post-content']}>
@@ -99,19 +108,20 @@ const ArticleDetails = (props) => {
                 </div>
                 <div className={styles['post-info']}>
                     <span>Article By: {creator.username}</span>
-                    <span>Created: {createdAt}</span>
+                    <span>Created: {(new Date(createdAt)).toDateString()}</span>
                     <span>Category: {category}</span>
                     {/* <span>2 Comments</span>
                     <span>2 Likes</span> */}
                 </div>
                 <button className={styles.positionLike} onClick={likeButtonHandler}>
-                            <FontAwesomeIcon icon={['fas', 'heart']} size="3x" className={active ? styles.like : styles.unlike}></FontAwesomeIcon>
-                            {likeCount}
-                        </button>
+                    <FontAwesomeIcon icon={['fas', 'heart']} size="3x" className={active ? styles.like : styles.unlike}></FontAwesomeIcon>
+                    {likeCount}
+                </button>
             </div>
             <div className={styles['post-title']}>
                 <p>{article}</p>
             </div>
+            <Comments comments={comments} updateComments={updateComments} />
         </div>
     )
 }
