@@ -2,10 +2,6 @@ const { Article, User } = require('../models');
 
 module.exports = {
     get: {
-        one: (req, res) => {
-
-        },
-
         all: (req, res, next) => {
             const length = req.query.length ? parseInt(req.query.length) : 6;
 
@@ -14,15 +10,10 @@ module.exports = {
                 .catch(next);
         },
 
-        // create: (req, res) => {
-        //     console.log(req)
-        // },
-
         details: (req, res) => {
             const id = req.params.id
             Article.findById(id).populate('creator')
                 .then(article => {
-                    console.log(article)
                     res.send(article)
                 }).catch(err => {
                     console.log(err);
@@ -57,7 +48,6 @@ module.exports = {
             Article.findByIdAndUpdate(id, { $push: { likes: _id } }, { new: true })
                 .then((result) => {
                     res.send(result)
-                    console.log('liked !!!')
                 })
                 .catch(err => {
                     console.log(err)
@@ -71,7 +61,40 @@ module.exports = {
             Article.findByIdAndUpdate(id, { $pull: { likes: _id } }, { new: true })
                 .then((result) => {
                     res.send(result)
-                    console.log('unliked !!!')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+
+        comment: (req, res) => {
+            const { id } = req.params;
+            const { _id } = req.user;
+            const { username } = req.user;
+
+            const { comment } = req.body;
+            comment.postedBy = _id;
+            comment.name = username;
+
+            Article.findByIdAndUpdate(id, { $push: { comments: comment } }, { new: true })
+                .sort('createdAt')
+                .populate('comments.postedBy')
+                .populate('postedBy', '_id username')
+                .then((result) => {
+                    res.json(result)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+
+        uncomment: (req, res) => {
+            const { id } = req.params;
+            const { comment } = req.body;
+
+            Article.findByIdAndUpdate(id, { $pull: {comments: {_id: comment._id}} }, { new: true })
+                .then((result) => {
+                    res.send(result)
                 })
                 .catch(err => {
                     console.log(err)
@@ -104,28 +127,12 @@ module.exports = {
 
         edit: (req, res) => {
             const { id } = req.params;
-            // const { _id } = req.user;
 
             const {
                 title,
-                // article,
                 image,
                 category
             } = req.body;
-
-            // Article.findByIdAndUpdate({ _id: id }, { title, article, image, category })
-            //     .then((article) => {
-            //         return Promise.all([
-            //             User.updateOne({ _id }, { $push: { createdArticles: article } }),
-            //             Article.findOne({ _id: article._id })
-            //         ]);
-            //     })
-            //     .then(([modifiedObj, article]) => {
-            //         res.send(article);
-            //     })
-            //     .catch(err => {
-            //         console.log(err);
-            //     })
 
             Article.findById(id)
                 .then(article => {

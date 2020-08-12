@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Model = mongoose.model;
 
-const { String, Number, ObjectId } = Schema.Types;
+const { String, ObjectId } = Schema.Types;
 
 const articleSchema = new Schema({
     title: {
@@ -38,12 +38,13 @@ const articleSchema = new Schema({
     ],
     comments: [
         {
+            name: String,
             text: String,
-            createdAt: {
+            created: {
                 type: mongoose.SchemaTypes.Date,
                 default: Date.now
             },
-            createdBy: {
+            postedBy: {
                 type:ObjectId,
                 ref: 'User'
             }

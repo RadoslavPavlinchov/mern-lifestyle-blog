@@ -31,7 +31,7 @@ const CreateArticle = () => {
             }
         })
         .then(() => {
-            alert('The article has been deleted successfully!')
+            alert('The article has been created successfully!')
         })
 
         setTitle('');

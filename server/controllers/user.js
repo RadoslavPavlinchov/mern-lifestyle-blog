@@ -5,17 +5,6 @@ const { cookie } = require('../config/config');
 
 module.exports = {
     get: {
-        // login: (req, res, next) => {
-        //     console.log('Login page')
-        //     return;
-        //     // User.find()
-        //     //     .then((users) => res.send(users))
-        //     //     .catch(next)
-        // },
-        // register: (req, res, next) => {
-        //     console.log('Register page')
-        //     return;
-        // },
         logout: (req, res, next) => {
             const token = req.cookies[cookie];
 
@@ -48,8 +37,6 @@ module.exports = {
                                 return;
                             }
                             const token = jwt.createToken({ id: user._id });
-
-                            // res.cookie(cookie, token, { maxAge: 3600000 })
                             res.header('Authorization', token)
                                 .send(user);
                         })
@@ -68,8 +55,6 @@ module.exports = {
             User.create({ username, password })
                 .then(registeredUser => {
                     const token = jwt.createToken({ id: registeredUser._id });
-
-                    // res.cookie(cookie, token, { maxAge: 3600000 })
                     res.header('Authorization', token)
                         .send(registeredUser);
 
@@ -88,20 +73,12 @@ module.exports = {
                                 status: true,
                                 user
                             })
-                            // req.user = user;
-                            // next();
                         });
                 }).catch(err => {
-                    // if (!redirectUnauthenticated) {
-                    //     next();
-                    //     return;
-                    // }
                     if (['token expired', 'blacklisted token', 'jwt must be provided'].includes(err.message)) {
                         res.status(401).send('UNAUTHORIZED!');
                         return;
                     }
-                    // res.redirect('/user/login')
-                    // next(err);
                     res.send({
                         status: false
                     })

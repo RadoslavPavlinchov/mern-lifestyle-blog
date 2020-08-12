@@ -25,7 +25,6 @@ import UserContext from './Context';
 
 const Router = () => {
     const context = useContext(UserContext);
-    // console.log(context);
 
     const loggedIn = context.user.loggedIn;
 
