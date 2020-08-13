@@ -5,13 +5,13 @@ const navigationLinks = (user) => {
             title: 'Home',
             link: '/'
         },
-        {
-            title: 'Categories',
-            link: '/categories'
-        },
+        // {
+        //     title: 'Categories',
+        //     link: '/categories'
+        // },
         {
             title: 'About Us',
-            link: '/contact-us'
+            link: '/about-us'
         },
         {
             title: 'Profile',
@@ -24,13 +24,13 @@ const navigationLinks = (user) => {
             title: 'Home',
             link: '/'
         },
-        {
-            title: 'Categories',
-            link: '/categories'
-        },
+        // {
+        //     title: 'Categories',
+        //     link: '/categories'
+        // },
         {
             title: 'About Us',
-            link: '/contact-us'
+            link: '/about-us'
         },
         {
             title: 'Login',

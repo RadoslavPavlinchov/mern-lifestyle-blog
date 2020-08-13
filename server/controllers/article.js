@@ -46,6 +46,12 @@ module.exports = {
             const { _id } = req.user;
 
             Article.findByIdAndUpdate(id, { $push: { likes: _id } }, { new: true })
+                .then(article => {
+                    User.updateOne({ _id }, { $push: { likedArticles: article } })
+                        .then(res => {
+                            return res
+                        })
+                })
                 .then((result) => {
                     res.send(result)
                 })
@@ -58,13 +64,18 @@ module.exports = {
             const { id } = req.params;
             const { _id } = req.user;
 
-            Article.findByIdAndUpdate(id, { $pull: { likes: _id } }, { new: true })
-                .then((result) => {
-                    res.send(result)
-                })
-                .catch(err => {
+            Article.findOne({ id })
+                .then(() => {
+                    return Promise.all([
+                        User.findByIdAndUpdate({ _id }, { $pull: { likedArticles: id } }),
+                        Article.findByIdAndUpdate(id, { $pull: { likes: _id } }, { new: true })
+                    ]);
+                }).then(([modifiedObj, article]) => {
+                    res.send(article);
+                }).catch((err) => {
                     console.log(err)
                 })
+
         },
 
         comment: (req, res) => {
@@ -92,7 +103,7 @@ module.exports = {
             const { id } = req.params;
             const { comment } = req.body;
 
-            Article.findByIdAndUpdate(id, { $pull: {comments: {_id: comment._id}} }, { new: true })
+            Article.findByIdAndUpdate(id, { $pull: { comments: { _id: comment._id } } }, { new: true })
                 .then((result) => {
                     res.send(result)
                 })

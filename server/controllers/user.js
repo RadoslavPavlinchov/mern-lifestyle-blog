@@ -17,6 +17,7 @@ module.exports = {
         },
         profile: (req, res, next) => {
             User.findById(req.query.id)
+                .populate('likedArticles')
                 .then((user) => res.send(user))
                 .catch(err => {
                     res.status(500)

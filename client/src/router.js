@@ -19,6 +19,7 @@ import EditArticle from './pages/admin/articles/edit';
 import ArticleDetails from './components/article/article-details';
 // import ErrorPage from './components/error';
 import UserContext from './Context';
+import AboutUs from './pages/about-us';
 
 // ToDo: Make more lazy loaded components 
 // const LazyArticleSingle = React.lazy(() => import('./components/article/article-single'))
@@ -40,6 +41,7 @@ const Router = () => {
                     <Route path="/article/details/:id" component={ArticleDetails} />
                     <Route path="/article/all" component={ArticleContainer} />
                     <Route path="/register" component={RegisterPage} />
+                    <Route path="/about-us" component={AboutUs} />
 
                     <Route path="/login">
                         {loggedIn ? (<Redirect to='/' />) : (<LoginPage />)}

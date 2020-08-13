@@ -24,7 +24,7 @@ const ArticleDetails = (props) => {
     const context = useContext(UserContext);
 
     const updateComments = (comments) => {
-        setComments({comments: comments})
+        setComments({ comments: comments })
     }
 
     const toggleLikeColor = () => {
@@ -70,8 +70,6 @@ const ArticleDetails = (props) => {
             .then(res => {
                 setLike(!like);
             })
-
-
         toggleLikeColor()
     }
 
@@ -110,18 +108,25 @@ const ArticleDetails = (props) => {
                     <span>Article By: {creator.username}</span>
                     <span>Created: {(new Date(createdAt)).toDateString()}</span>
                     <span>Category: {category}</span>
-                    {/* <span>2 Comments</span>
-                    <span>2 Likes</span> */}
                 </div>
-                <button className={styles.positionLike} onClick={likeButtonHandler}>
-                    <FontAwesomeIcon icon={['fas', 'heart']} size="3x" className={active ? styles.like : styles.unlike}></FontAwesomeIcon>
-                    {likeCount}
-                </button>
+
+                {
+                    (context.user.loggedIn) && <button className={styles.positionLike} onClick={likeButtonHandler}>
+                        <FontAwesomeIcon icon={['fas', 'heart']} size="3x" className={active ? styles.like : styles.unlike}></FontAwesomeIcon>
+                        {likeCount}
+                    </button>
+                }
+
+
             </div>
             <div className={styles['post-title']}>
                 <p>{article}</p>
             </div>
-            <Comments comments={comments} updateComments={updateComments} />
+
+            {
+                (context.user.loggedIn) && <Comments comments={comments} updateComments={updateComments} />
+            }
+            
         </div>
     )
 }
