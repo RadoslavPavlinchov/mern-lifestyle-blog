@@ -27,14 +27,10 @@ class LoginPage extends Component {
         e.preventDefault()
         const { username, password } = this.state;
 
-        console.log(this.context)
-
         authenticate('http://localhost:8080/api/user/login', {
             username,
             password
         }, (user) => {
-            console.log('You are logged in');
-            
             this.context.login(user);
             this.props.history.push('/');
         }, (err) => {

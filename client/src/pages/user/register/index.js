@@ -56,8 +56,6 @@ class RegisterPage extends Component {
             password,
             rePassword
         }, (user) => {
-            console.log('You are logged in');
-
             this.context.login(user);
             this.props.history.push('/')
         }, (err) => {
