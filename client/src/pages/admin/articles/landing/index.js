@@ -30,7 +30,7 @@ const ManageArticles = () => {
                     <td>{article.title}</td>
                     <td>{article.creator.username}</td>
                     <td><Link to={{
-                        pathname: `/article/edit/${article._id}`
+                        pathname: `/admin/article/edit/${article._id}`
                     }} className={styles.edit}>Edit</Link></td>
                     <td><Link to="#" onClick={() => deleteArticle(article._id)} className={styles.delete}>Delete</Link></td>
                     <td><Link to="#" className={styles.publish}>Publish</Link></td>

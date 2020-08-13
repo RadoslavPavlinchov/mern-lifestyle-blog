@@ -28,6 +28,11 @@ const userSchema = new Schema({
       ref: 'Article'
     }
   ],
+  role: {
+    type: String,
+    enum: ['basic', 'admin'],
+    default: 'basic'
+  },
   likedArticles: [
     {
       type: ObjectId,

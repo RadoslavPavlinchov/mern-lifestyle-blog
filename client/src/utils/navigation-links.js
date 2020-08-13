@@ -13,21 +13,9 @@ const navigationLinks = (user) => {
             title: 'About Us',
             link: '/contact-us'
         },
-        // {
-        //     title: 'Login',
-        //     link: '/login'
-        // },
-        // {
-        //     title: 'Register',
-        //     link: '/register'
-        // },
         {
             title: 'Profile',
             link: `/profile/${user && user.id}`
-        },
-        {
-            title: 'Admin',
-            link: '/admin'
         }
     ];
 
@@ -51,14 +39,18 @@ const navigationLinks = (user) => {
         {
             title: 'Register',
             link: '/register'
-        },
-        // {
-        //     title: 'Profile',
-        //     link: `/profile/${id}`
-        // }
+        }
     ];
 
     const loggedIn = user && user.loggedIn
+    const role = user.role
+
+    if (role === 'admin') {
+        authLinks.push({
+            title: 'Admin',
+            link: '/admin'
+        })
+    }
 
     return loggedIn ? authLinks : guestLinks;
 }

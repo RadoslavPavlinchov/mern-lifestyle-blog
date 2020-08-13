@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import styles from './index.module.css'
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import Input from '../../../../components/input';
 import TextArea from '../../../../components/textarea';
 import SubmitButton from '../../../../components/submit-btn'
 import getCookie from '../../../../utils/getCookie';
 
-const EditArticle = (props) => {
+const EditArticle = () => {
 
     const [title, setTitle] = useState('')
     const [article, setArticle] = useState('');
     const [image, setImage] = useState('');
     const [category, setCategory] = useState('');
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('');
+
+    const match = useRouteMatch();
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/article/edit/${props.match.params.id}`)
+        fetch(`http://localhost:8080/api/article/edit/${match.params.id}`)
             .then((article) => {
                 return article.json();
             })
@@ -34,7 +36,7 @@ const EditArticle = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await fetch(`http://localhost:8080/api/article/edit/${props.match.params.id}`, {
+        await fetch(`http://localhost:8080/api/article/edit/${match.params.id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 title,

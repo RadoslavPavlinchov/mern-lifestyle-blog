@@ -42,7 +42,8 @@ const UserState = (props) => {
             if (res.status) {
                 login({
                     username: res.user.username,
-                    id: res.user._id
+                    id: res.user._id,
+                    role: res.user.role
                 })
             } else {
                 logout()
