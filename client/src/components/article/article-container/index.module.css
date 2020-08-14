@@ -1,3 +1,7 @@
+.container {
+    padding-top: 100px;
+}
+
 .site-content {
     display: grid;
     grid-template-columns: 70% 30%;

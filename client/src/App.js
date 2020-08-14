@@ -22,11 +22,11 @@ class App extends Component {
     return (
       <div className="App">
 
+        <Main />
+
         <ErrorBoundary>
           <ArticleLanding />
         </ErrorBoundary>
-
-        <Main />
 
         <ArticleContainer />
 

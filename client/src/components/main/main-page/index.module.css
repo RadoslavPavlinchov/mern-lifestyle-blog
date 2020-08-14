@@ -1,19 +1,21 @@
 .siteTitle {
     background: url('../../../images/photo-1524046661702-8dde9f762203.jpg');
     background-size: cover;
-    height: 110vh;
+    height: 93vh;
     display: flex;
     justify-content: center;
+
 }
 
 .siteBackground {
-    padding-top: 35rem;
+    padding-top: 31rem;
     text-align: center;
     color: #fff;
 }
 
-h1, h3 {
+.texts {
     margin: .3rem;
+    text-shadow: 4px 4px 7px black;
 }
 
 .btn {
@@ -23,10 +25,12 @@ h1, h3 {
     padding: 1rem 3rem;
     font-size: 1rem;
     cursor: pointer;
+    border: 1px solid #fff;
+    color: #fff;
 }
 
 .btn:hover {
-    background: transparent;
+    background: white;
     border: 1px solid #fff;
-    color: #fff;
+    color: #000;
 }
