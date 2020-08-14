@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './index.css'
+import styles from './index.module.css'
 import { Link } from 'react-router-dom';
 
 class ArticleLanding extends Component {
@@ -30,7 +30,7 @@ class ArticleLanding extends Component {
                     <Link to={{
                         pathname: `/article/details/${article._id}`
                     }} key={index}>
-                        <div className="index-boxlink-rectangle">
+                        <div className={styles["index-boxlink-rectangle"]}>
                             <img src={article.image} alt="a" />
                             <h3>{article.title}</h3>
                             <p>{article.description}</p>
@@ -43,7 +43,7 @@ class ArticleLanding extends Component {
                 <Link to={{
                     pathname: `/article/details/${article._id}`
                 }} key={index}>
-                    <div className="index-boxlink-square">
+                    <div className={styles["index-boxlink-square"]}>
                         <img src={article.image} alt="a" />
                         <h3>{article.title}</h3>
                         <p>{article.description}</p>
@@ -59,8 +59,8 @@ class ArticleLanding extends Component {
 
     render() {
         return (
-            <div className="wrapper">
-                <section className="index-links">
+            <div className={styles["wrapper"]}>
+                <section className={styles["index-links"]}>
                     {this.renderArticles()}
                 </section>
             </div>

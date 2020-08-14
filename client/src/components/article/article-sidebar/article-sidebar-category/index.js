@@ -1,6 +1,6 @@
 import React from 'react';
-import './index.css';
-import sidebarLinks from '../../../utils/sidebar-links';
+import styles from './index.module.css';
+import sidebarLinks from '../../../../utils/sidebar-links';
 
 const Category = () => {
 
@@ -12,7 +12,7 @@ const Category = () => {
             <ul className="category-list">
                 {
                     links.map((link, index) => (
-                        <li className="list-items">
+                        <li className={styles["list-items"]}>
                             <a href="#">{link.title}</a>
                             <span>{link.count}</span>
                         </li>

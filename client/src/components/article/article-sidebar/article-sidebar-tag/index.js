@@ -1,11 +1,11 @@
 import React from 'react';
-import './index.css';
+import styles from './index.module.css';
 
 const Tag = () => {
     return (
-        <div className="all-tags">
+        <div className={styles["all-tags"]}>
             <h2>Tags</h2>
-            <div className="tags flex-row">
+            <div className={styles["tags flex-row"]}>
                 <span className="tag">#lifestyle</span>
                 <span className="tag">#lifestyle</span>
                 <span className="tag">#lifestyle</span>

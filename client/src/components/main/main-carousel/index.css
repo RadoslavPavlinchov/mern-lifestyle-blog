@@ -13,9 +13,14 @@
 
 .slide {
     position: relative;
-    min-width: 100%;
-    height: 80%;
+    min-width: 50%;
+    height: 90%;
     transition:.5s;
+}
+
+.slide:hover {
+    opacity: 0.8;
+    cursor: pointer;
 }
 
 #goLeft {
@@ -24,7 +29,7 @@
     left: 0;
     transform: translateY(-50%);
     width: 10%;
-    height: 80%;
+    height: 90%;
     background: none;
     border: none;
     outline: none;
@@ -42,7 +47,7 @@
     right: 0;
     transform: translateY(-50%);
     width: 10%;
-    height: 80%;
+    height: 90%;
     background: none;
     border: none;
     outline: none;

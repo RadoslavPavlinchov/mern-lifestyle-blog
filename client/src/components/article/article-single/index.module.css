@@ -8,10 +8,11 @@
 }
 
 .post-content > .post-image .post-info {
-    background: skyblue;
+    background: white;
+    border: 1px solid #000; 
     padding: 1rem;
     position: absolute;
-    bottom: 0%;
+    bottom: 5%;
     left: 20vw;
     border-radius: 3rem;
 
@@ -26,6 +27,7 @@
 
 .post-content > .post-image .img {
     width: 100%;
+    height: auto;
     transition: all 1s ease;
 }
 
@@ -44,10 +46,21 @@
 .post-btn {
     border-radius: 0;
     padding: .7rem 1.5rem;
-    background: skyblue;
+    background: silver;
+    border: 1px solid black;
 
-    margin: 1.8rem;
-    border: none;
+    margin: 1rem;
+    border-radius: 2rem;
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.post-btn:hover {
+    border-radius: 0;
+    padding: .7rem 1.5rem;
+    background: white;
+    margin: 1rem;
     border-radius: 2rem;
     padding: 1rem 3rem;
     font-size: 1rem;

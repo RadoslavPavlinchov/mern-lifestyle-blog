@@ -53,47 +53,40 @@ const Router = () => {
                         {loggedIn ? (<ProfilePage />) : (<Redirect to='/login' />)} 
                     </Route> */}
 
-                    {/* <Route path="/admin/articles" component={ManageArticles} /> */}
                     <Route path="/admin/articles">
-                        {(loggedIn && (role === 'admin'))? (<ManageArticles />) : (<Redirect to='/login' />)} 
+                        {(loggedIn && (role === 'admin'))? (<ManageArticles />) : (<Redirect to='/NotFound' />)} 
                     </Route>
 
-                    {/* <Route path="/admin/article/create" component={CreateArticle} /> */}
                     <Route path="/admin/article/create">
-                        {(loggedIn && (role === 'admin'))? (<CreateArticle />) : (<Redirect to='/login' />)} 
+                        {(loggedIn && (role === 'admin'))? (<CreateArticle />) : (<Redirect to='/NotFound' />)} 
                     </Route>
 
-                    {/* <Route path="/admin/article/edit/:id" component={EditArticle} /> */}
                     <Route path="/admin/article/edit/:id">
-                        {(loggedIn && (role === 'admin'))? (<EditArticle />) : (<Redirect to='/login' />)} 
+                        {(loggedIn && (role === 'admin'))? (<EditArticle />) : (<Redirect to='/NotFound' />)} 
                     </Route>
 
-                    {/* <Route path="/admin/users" component={ManageUsers} /> */}
                     <Route path="/admin/users">
-                        {(loggedIn && (role === 'admin'))? (<ManageUsers />) : (<Redirect to='/login' />)} 
+                        {(loggedIn && (role === 'admin'))? (<ManageUsers />) : (<Redirect to='/NotFound' />)} 
                     </Route>
 
-                    {/* <Route path="/admin/user/create" component={CreateUser} /> */}
                     <Route path="/admin/user/create">
-                        {(loggedIn && (role === 'admin'))? (<CreateUser />) : (<Redirect to='/login' />)} 
+                        {(loggedIn && (role === 'admin'))? (<CreateUser />) : (<Redirect to='/NotFound' />)} 
                     </Route>
 
-                    {/* <Route path="/admin/category/create" component={CreateCategory} /> */}
                     <Route path="/admin/category/create">
-                        {(loggedIn && (role === 'admin'))? (<CreateCategory />) : (<Redirect to='/login' />)} 
+                        {(loggedIn && (role === 'admin'))? (<CreateCategory />) : (<Redirect to='/NotFound' />)} 
                     </Route>
 
-                    {/* <Route path="/admin/categories" component={ManageCategories} /> */}
                     <Route path="/admin/categories">
-                        {(loggedIn && (role === 'admin'))? (<ManageCategories />) : (<Redirect to='/login' />)} 
+                        {(loggedIn && (role === 'admin'))? (<ManageCategories />) : (<Redirect to='/NotFound' />)} 
                     </Route>
 
                     <Route path="/admin">
-                        {(loggedIn && (role === 'admin'))? (<ManageArticles />) : (<Redirect to='/login' />)} 
+                        {(loggedIn && (role === 'admin'))? (<ManageArticles />) : (<Redirect to='/NotFound' />)} 
                     </Route>
 
                     <Route component={NotFound} />
-                    {/* <Route component={ErrorPage} /> */}
+                    
                 </Switch>
             </Suspense>
         </BrowserRouter>
