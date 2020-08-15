@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.module.css';
-import Newsletter from '../article/article-sidebar-newsletter';
+import Newsletter from '../article/article-sidebar/article-sidebar-newsletter';
 
 const Footer = () => {
     return (
