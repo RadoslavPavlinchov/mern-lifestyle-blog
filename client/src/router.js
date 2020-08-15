@@ -1,28 +1,27 @@
-import React, { lazy, Suspense, useContext } from 'react';
+import React, { Suspense, useContext } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+
+import UserContext from './Context';
+
 import App from './App';
 import Navigation from './components/navigation';
-
 import ArticleContainer from './components/article/article-container';
-import NotFound from './components/notFound';
 import RegisterPage from './pages/user/register';
 import LoginPage from './pages/user/login';
-import ProfilePage from './pages/profile';
-// import AdminDashboard from './pages/admin/dashboard';
-import CreateArticle from './pages/admin/articles/create';
-import ManageCategories from './pages/admin/categories/landing';
-import CreateCategory from './pages/admin/categories/create';
-import ManageUsers from './pages/admin/users/landing';
-import CreateUser from './pages/admin/users/create';
-import ManageArticles from './pages/admin/articles/landing';
-import EditArticle from './pages/admin/articles/edit';
-import ArticleDetails from './components/article/article-details';
-// import ErrorPage from './components/error';
-import UserContext from './Context';
-import AboutUs from './pages/about-us';
+import CircularIndeterminate from './components/loading-spinner/index';
 
-// ToDo: Make more lazy loaded components 
-// const LazyArticleSingle = React.lazy(() => import('./components/article/article-single'))
+const ProfilePage = React.lazy(() => import('./pages/profile'));
+const AboutUs = React.lazy(() => import('./pages/about-us'));
+const NotFound = React.lazy(() => import('./components/notFound'));
+
+const CreateArticle = React.lazy(() => import('./pages/admin/articles/create'));
+const ManageCategories = React.lazy(() => import('./pages/admin/categories/landing'));
+const CreateCategory = React.lazy(() => import('./pages/admin/categories/create'));
+const ManageUsers = React.lazy(() => import('./pages/admin/users/landing'));
+const CreateUser = React.lazy(() => import('./pages/admin/users/create'));
+const ManageArticles = React.lazy(() => import('./pages/admin/articles/landing'));
+const EditArticle = React.lazy(() => import('./pages/admin/articles/edit'));
+const ArticleDetails = React.lazy(() => import('./components/article/article-details'));
 
 const Router = () => {
     const context = useContext(UserContext);
@@ -33,60 +32,48 @@ const Router = () => {
     return (
         <BrowserRouter>
             <Navigation />
-            {/* Add component for the loading */}
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<CircularIndeterminate/>}>
                 <Switch>
                     <Route path="/" exact component={App} />
-                    {/* <Route path="/article/details/:id" component={LazyArticleSingle} /> */}
                     <Route path="/article/details/:id" component={ArticleDetails} />
                     <Route path="/article/all" component={ArticleContainer} />
-                    <Route path="/register" component={RegisterPage} />
                     <Route path="/about-us" component={AboutUs} />
 
+                    <Route path="/register">
+                        {loggedIn ? (<Redirect to='/' />) : (<RegisterPage />)}
+                    </Route>
                     <Route path="/login">
                         {loggedIn ? (<Redirect to='/' />) : (<LoginPage />)}
                     </Route>
-
-                    <Route path="/profile/:id" component={ProfilePage} />
-
-                    {/* <Route path="/profile/:id">
+                    <Route path="/profile/:id">
                         {loggedIn ? (<ProfilePage />) : (<Redirect to='/login' />)} 
-                    </Route> */}
-
+                    </Route>
                     <Route path="/admin/articles">
                         {(loggedIn && (role === 'admin'))? (<ManageArticles />) : (<Redirect to='/NotFound' />)} 
                     </Route>
-
                     <Route path="/admin/article/create">
                         {(loggedIn && (role === 'admin'))? (<CreateArticle />) : (<Redirect to='/NotFound' />)} 
                     </Route>
-
                     <Route path="/admin/article/edit/:id">
                         {(loggedIn && (role === 'admin'))? (<EditArticle />) : (<Redirect to='/NotFound' />)} 
                     </Route>
-
                     <Route path="/admin/users">
                         {(loggedIn && (role === 'admin'))? (<ManageUsers />) : (<Redirect to='/NotFound' />)} 
                     </Route>
-
                     <Route path="/admin/user/create">
                         {(loggedIn && (role === 'admin'))? (<CreateUser />) : (<Redirect to='/NotFound' />)} 
                     </Route>
-
                     <Route path="/admin/category/create">
                         {(loggedIn && (role === 'admin'))? (<CreateCategory />) : (<Redirect to='/NotFound' />)} 
                     </Route>
-
                     <Route path="/admin/categories">
                         {(loggedIn && (role === 'admin'))? (<ManageCategories />) : (<Redirect to='/NotFound' />)} 
                     </Route>
-
                     <Route path="/admin">
                         {(loggedIn && (role === 'admin'))? (<ManageArticles />) : (<Redirect to='/NotFound' />)} 
                     </Route>
 
                     <Route component={NotFound} />
-                    
                 </Switch>
             </Suspense>
         </BrowserRouter>
