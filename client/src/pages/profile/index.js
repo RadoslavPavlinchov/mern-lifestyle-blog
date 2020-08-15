@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import UserContext from '../../Context';
 import styles from './index.module.css';
+import { withRouter } from "react-router";
+import CircularIndeterminate from '../../components/loading-spinner';
 
 class ProfilePage extends Component {
 
@@ -44,9 +46,7 @@ class ProfilePage extends Component {
         const { username, articles, articlesCount } = this.state;
 
         if (!username) {
-            return (
-                <div>Loading...</div>
-            )
+            return (<CircularIndeterminate/>)
         }
 
         return (
@@ -79,4 +79,4 @@ class ProfilePage extends Component {
     }
 }
 
-export default ProfilePage;
+export default withRouter(ProfilePage);

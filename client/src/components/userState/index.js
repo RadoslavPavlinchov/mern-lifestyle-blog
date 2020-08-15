@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UserContext from '../../Context';
 import getCookie from '../../utils/getCookie';
+import CircularIndeterminate from '../loading-spinner/index';
 
 const UserState = (props) => {
     const [user, setUser] = useState(null);
@@ -53,7 +54,7 @@ const UserState = (props) => {
     }, []);
 
     if (loading) {
-        return (<div>Loading...</div>)
+        return (<CircularIndeterminate />)
     }
 
     return (
