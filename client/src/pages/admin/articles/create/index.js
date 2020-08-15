@@ -10,9 +10,21 @@ const CreateArticle = () => {
 
     const [title, setTitle] = useState('')
     const [article, setArticle] = useState('');
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState(null);
     const [category, setCategory] = useState('');
-    // const [updatedOrigami, setUpdatedOrigami] = useState([])
+
+    const openWidget = () => {
+        const widget = window.cloudinary.createUploadWidget({
+            cloudName: 'dymjwxfvd',
+            uploadPreset: 'mern-lifestyle-blog',
+        }, (error, result) => {
+            if (result.event === 'success') {
+                console.log(result.info.url)
+                setImage(result.info.url)
+            }
+        })
+        widget.open()
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,13 +42,13 @@ const CreateArticle = () => {
                 'Authorization': getCookie('x-auth-token')
             }
         })
-        .then(() => {
-            alert('The article has been created successfully!')
-        })
+            .then(() => {
+                alert('The article has been created successfully!')
+            })
 
         setTitle('');
         setArticle('');
-        setImage('');
+        setImage(null);
         setCategory('')
     }
 
@@ -56,7 +68,11 @@ const CreateArticle = () => {
                 <div className={styles.content}>
                     <h2 className={styles['page-title']}>Create Article</h2>
 
+                    <SubmitButton title='Upload Image' onClick={openWidget} />
+
                     <form>
+                        {image ? (<img src={image} className={styles['img-cloud']}/>) : null}
+
                         <Input
                             id='title'
                             label='Title'
@@ -66,29 +82,13 @@ const CreateArticle = () => {
                         />
 
                         <label htmlFor="article">Article</label>
-                        <TextArea id="article" name="article" value={article} onChange={e => setArticle(e.target.value)} />
 
-                        {/* <div>
-                            <label>Image</label>
-                            <input type="file" name="image" className={styles['text-input']} />
-                        </div> */}
-
-                        <Input
-                            id='image'
-                            label='Image'
-                            type='text'
-                            onChange={e => setImage(e.target.value)}
-                            value={image}
+                        <TextArea
+                            id="article"
+                            name="article"
+                            value={article}
+                            onChange={e => setArticle(e.target.value)}
                         />
-
-                        {/* <div>
-                            <label>Category</label>
-                            <select name="category" className={styles['text-input']}>
-                                <option value="Life">Life</option>
-                                <option value="Tech">Tech</option>
-                                <option value="Hiking">Hiking</option>
-                            </select>
-                        </div> */}
 
                         <Input
                             id='category'
@@ -99,13 +99,9 @@ const CreateArticle = () => {
                         />
 
                         <SubmitButton title="Create" onClick={handleSubmit} />
-
                     </form>
-
                 </div>
-
             </div>
-
         </div>
     )
 }
