@@ -3,6 +3,7 @@ import styles from './index.module.css';
 import Input from '../../../components/input';
 import authenticate from '../../../utils/authenticate';
 import UserContext from '../../../Context';
+import { Link } from 'react-router-dom';
 
 class RegisterPage extends Component {
 
@@ -61,46 +62,9 @@ class RegisterPage extends Component {
         }, (err) => {
             console.log(err)
         });
-
-        // try {
-
-        //     const promise = await fetch('http://localhost:8080/api/user/register', {
-        //         method: 'POST',
-        //         body: JSON.stringify({
-        //             username,
-        //             password,
-        //             rePassword
-        //         }),
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         }
-        //     })
-
-        //     const authToken = promise.headers.get('Authorization');
-        //     document.cookie = `x-auth-token=${authToken}`;
-
-        //     const response = await promise.json();
-
-        //     if (response.username && authToken) {
-        //         this.props.history.push('/')
-        //     }
-
-        // } catch (error) {
-        //     console.log(error)
-        // }
     }
 
     handleUsernameBlur = () => {
-        // if (!this.state.username.includes('@')) {
-        //     this.setState({
-        //         usernameError: true
-        //     })
-        // } else if (this.state.usernameError) {
-        //     this.setState({
-        //         usernameError: false
-        //     })
-        // }
-
         const { username } = this.state;
 
         if (username.length < 3) {
@@ -170,7 +134,6 @@ class RegisterPage extends Component {
                                 error={usernameError}
                             />
 
-                            {/* {usernameError ? (<span className={styles.err}>This is not a valid username!</span>) : null} */}
                             {usernameError ? (<span className={styles.err}>The username should be at least 3 characters!</span>) : null}
 
                             <Input
@@ -201,25 +164,13 @@ class RegisterPage extends Component {
 
                         </form>
 
-
-
                         <p className={styles['forgot-pass']}>Forgot Password ?</p>
-                        <div className={styles['social-media']}>
-                            <ul>
-                                <li>F</li>
-                                <li>T</li>
-                                <li>I</li>
-                                <li>P</li>
-                            </ul>
-                        </div>
                         <div className={styles['sub-cont']}>
                             <div className={styles.img}>
                                 <div className={styles['img-text']}>
                                     <h2>One of us</h2>
                                     <p>If you already have an account, just login.</p>
-                                </div>
-                                <div className={styles['img-btn']}>
-                                    <span className={styles['m-in']}>Login</span>
+                                    <Link to={'/login'}>Login</Link>
                                 </div>
                             </div>
                         </div>

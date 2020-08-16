@@ -3,7 +3,7 @@
 }
 
 .post-content > .post-image, .post-title {
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
     position: relative;
 }
 
@@ -39,8 +39,8 @@
     margin: 0 .5rem;
 }
 
-.post-content .post-title a {
-    font-size: 1.5rem;
+.post-content .post-title h2 {
+    font-size: 2rem;
 }
 
 .post-btn {

@@ -1,15 +1,11 @@
-.newsletter {
-    /* padding-top: 10rem; */
-}
-
-/* .form-element {
-    padding: .5rem 2rem;
+.form-element {
+    padding-bottom: 10px;
 }
 
 .input-element {
-    width: 80%;
-    height: 1.9rem;
-    padding: .3rem .5rem;
+    width: 90%;
+    height: 1rem;
+    padding: 1rem 1rem 1rem 1rem;
     font-size: 1rem;
 }
 
@@ -18,11 +14,7 @@
     padding: .8rem 32%;
     background: grey;
     margin: 1rem 0;
-}
-
-.btn-1 {
-    border: none;
-    border-radius: 2rem;
     font-size: 1rem;
     cursor: pointer;
-} */
+    border: none;
+}

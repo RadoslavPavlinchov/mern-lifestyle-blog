@@ -72,4 +72,10 @@ th, td {
     padding-left: 340px;
 }
 
+.err {
+    display: flex;
+    justify-content: center;
+    color: red;
+}
+
 

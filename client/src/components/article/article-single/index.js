@@ -19,7 +19,7 @@ const ArticleSingle = ({ image, title, creator, createdAt, category, article, id
 
             </div>
             <div className={styles['post-title']}>
-                <a href="#">{title}</a>
+                <h2>{title}</h2>
                 <p>{`${article.substr(0, 200)}...`}</p>
                 <button className={styles['post-btn']}>
                     <Link to={{
