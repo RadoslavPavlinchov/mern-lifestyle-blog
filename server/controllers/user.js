@@ -5,6 +5,13 @@ const { cookie } = require('../config/config');
 
 module.exports = {
     get: {
+        all: (req, res, next) => {
+            User.find()
+                .then((users) => {
+                    res.send(users)
+                })
+                .catch(next);
+        },
         logout: (req, res, next) => {
             const token = req.cookies[cookie];
 
