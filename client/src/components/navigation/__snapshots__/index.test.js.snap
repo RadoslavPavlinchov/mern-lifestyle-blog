@@ -22,6 +22,7 @@ exports[`Navigation Component should render authenticated routes 1`] = `
       >
         <li
           className="navLink"
+          data-test-id="link-Home"
         >
           <a
             className="navAnchor"
@@ -33,21 +34,11 @@ exports[`Navigation Component should render authenticated routes 1`] = `
         </li>
         <li
           className="navLink"
+          data-test-id="link-About Us"
         >
           <a
             className="navAnchor"
-            href="/categories"
-            onClick={[Function]}
-          >
-            Categories
-          </a>
-        </li>
-        <li
-          className="navLink"
-        >
-          <a
-            className="navAnchor"
-            href="/contact-us"
+            href="/about-us"
             onClick={[Function]}
           >
             About Us
@@ -55,6 +46,7 @@ exports[`Navigation Component should render authenticated routes 1`] = `
         </li>
         <li
           className="navLink"
+          data-test-id="link-Profile"
         >
           <a
             className="navAnchor"
@@ -62,17 +54,6 @@ exports[`Navigation Component should render authenticated routes 1`] = `
             onClick={[Function]}
           >
             Profile
-          </a>
-        </li>
-        <li
-          className="navLink"
-        >
-          <a
-            className="navAnchor"
-            href="/admin"
-            onClick={[Function]}
-          >
-            Admin
           </a>
         </li>
       </ul>

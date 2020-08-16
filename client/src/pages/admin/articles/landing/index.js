@@ -25,7 +25,7 @@ const ManageArticles = () => {
     const renderArticles = () => {
         return articles.map((article, index) => {
             return (
-                <tr>
+                <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{article.title}</td>
                     <td>{article.creator.username}</td>
@@ -64,10 +64,12 @@ const ManageArticles = () => {
 
                     <table>
                         <thead>
+                            <tr>
                             <th>N</th>
                             <th>Title</th>
                             <th>Author</th>
                             <th colSpan="3">Action</th>
+                            </tr>
                         </thead>
 
                         <tbody>

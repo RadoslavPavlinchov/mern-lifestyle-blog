@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styles from './index.module.css';
 import { Link } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ const ManageUsers = () => {
     const renderUsers = () => {
         return users.map((user, index) => {
             return (
-                <tr>
+                <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{user.username}</td>
                     <td>{user.role}</td>
@@ -60,17 +60,19 @@ const ManageUsers = () => {
 
                     <table>
                         <thead>
-                            <th>N</th>
-                            <th>Username</th>
-                            <th>Role</th>
-                            <th colSpan="2">Actions</th>
+                            <tr>
+                                <th>N</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th colSpan="2">Actions</th>
+                            </tr>
                         </thead>
 
                         <tbody>
 
-                        {
-                            renderUsers()
-                        }
+                            {
+                                renderUsers()
+                            }
 
                         </tbody>
 

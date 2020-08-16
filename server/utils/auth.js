@@ -5,7 +5,6 @@ const { User } = require('../models');
 function auth(redirectUnauthenticated = true) {
     return function (req, res, next) {
         const token = req.headers.authorization || '';
-        console.log(token)
 
         jwt.verifyToken(token)
             .then((data) => {

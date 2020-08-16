@@ -25,9 +25,11 @@ const ManageCategories = () => {
 
                     <table>
                         <thead>
-                            <th>N</th>
-                            <th>Name</th>
-                            <th colSpan="2">Action</th>
+                            <tr>
+                                <th>N</th>
+                                <th>Name</th>
+                                <th colSpan="2">Action</th>
+                            </tr>
                         </thead>
 
                         <tbody>
