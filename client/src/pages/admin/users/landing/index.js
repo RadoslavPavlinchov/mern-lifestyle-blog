@@ -1,8 +1,43 @@
-import React from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import styles from './index.module.css';
 import { Link } from 'react-router-dom';
 
 const ManageUsers = () => {
+    const [users, setUsers] = useState([]);
+
+    const _getUsers = async () => {
+        const promise = await fetch(`http://localhost:8080/api/user/all`);
+        const users = await promise.json();
+        return users;
+    }
+
+    const deleteArticle = (id) => {
+        console.log('delete')
+    }
+
+    const getUsers = useCallback(async () => {
+        const users = await _getUsers();
+        setUsers(users);
+    }, []);
+
+    const renderUsers = () => {
+        return users.map((user, index) => {
+            return (
+                <tr>
+                    <td>{index + 1}</td>
+                    <td>{user.username}</td>
+                    <td>{user.role}</td>
+                    <td><Link to='#' className={styles.edit}>Edit</Link></td>
+                    <td><Link to='#' onClick={() => deleteArticle(user._id)} className={styles.delete}>Delete</Link></td>
+                </tr>
+            )
+        })
+    }
+
+    useEffect(() => {
+        getUsers();
+    }, [getUsers])
+
     return (
         <div className={styles['admin-wrapper']}>
 
@@ -27,30 +62,15 @@ const ManageUsers = () => {
                         <thead>
                             <th>N</th>
                             <th>Username</th>
-                            <th>Email</th>
                             <th>Role</th>
-                            <th colSpan="2">Action</th>
+                            <th colSpan="2">Actions</th>
                         </thead>
 
                         <tbody>
 
-                            <tr>
-                                <td>1</td>
-                                <td>Test</td>
-                                <td>test@test.com</td>
-                                <td>admin</td>
-                                <td><Link to="/" className={styles.edit}>Edit</Link></td>
-                                <td><Link to="/" className={styles.delete}>Delete</Link></td>
-                            </tr>
-
-                            <tr>
-                                <td>1</td>
-                                <td>Author</td>
-                                <td>rado@test.com</td>
-                                <td>author</td>
-                                <td><Link to="/" className={styles.edit}>Edit</Link></td>
-                                <td><Link to="/" className={styles.delete}>Delete</Link></td>
-                            </tr>
+                        {
+                            renderUsers()
+                        }
 
                         </tbody>
 
