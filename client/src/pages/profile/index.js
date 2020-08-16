@@ -3,6 +3,7 @@ import UserContext from '../../Context';
 import styles from './index.module.css';
 import { withRouter } from "react-router";
 import CircularIndeterminate from '../../components/loading-spinner';
+import { Link } from 'react-router-dom';
 
 class ProfilePage extends Component {
 
@@ -65,7 +66,7 @@ class ProfilePage extends Component {
                             {
                                 articles.map((link, index) => (
                                     <li key={index}>
-                                        <a href="#">{link.title}</a>
+                                        <Link to="#">{link.title}</Link>
                                     </li>
                                 ))
                             }

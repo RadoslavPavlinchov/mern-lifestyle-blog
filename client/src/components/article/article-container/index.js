@@ -3,6 +3,7 @@ import styles from './index.module.css';
 import ArticleSingle from '../article-single';
 import Sidebar from '../article-sidebar/article-sidebar-wrapper';
 import _getArticles from '../../../utils/getArticles';
+import { Link } from 'react-router-dom';
 
 const ArticleContainer = () => {
     const [articles, setArticles] = useState([]);
@@ -44,11 +45,11 @@ const ArticleContainer = () => {
 
                     <hr />
                     <div className={styles['pagination']}>
-                        <a href="#">left arrow</a>
-                        <a href="#" className={styles.pages}>1</a>
-                        <a href="#" className={styles.pages}>2</a>
-                        <a href="#" className={styles.pages}>3</a>
-                        <a href="#">right arrow</a>
+                        <Link to="#">left arrow</Link>
+                        <Link to="#" className={styles.pages}>1</Link>
+                        <Link to="#" className={styles.pages}>2</Link>
+                        <Link to="#" className={styles.pages}>3</Link>
+                        <Link to="#">right arrow</Link>
                     </div>
                 </div>
 

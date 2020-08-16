@@ -3,6 +3,7 @@ import styles from './index.module.css';
 import Input from '../../../components/input';
 import authenticate from '../../../utils/authenticate';
 import UserContext from '../../../Context';
+import { Link } from 'react-router-dom';
 
 class LoginPage extends Component {
 
@@ -11,7 +12,10 @@ class LoginPage extends Component {
 
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            usernameError: false,
+            passwordError: false,
+            submitBtnDisabled: true
         }
     }
 
@@ -21,11 +25,22 @@ class LoginPage extends Component {
         const newState = {};
         newState[type] = event.target.value;
         this.setState(newState);
+
+        if (this.state.username !== '' && this.state.password !== '' && this.state.rePassword !== '') {
+            this.setState({
+                submitBtnDisabled: false
+            })
+        }
     }
 
     handleSubmit = async (e) => {
         e.preventDefault()
-        const { username, password } = this.state;
+        const { username, usernameError, password, passwordError } = this.state;
+
+        if (usernameError || passwordError) {
+            console.log('There is an error')
+            return;
+        }
 
         authenticate('http://localhost:8080/api/user/login', {
             username,
@@ -36,38 +51,37 @@ class LoginPage extends Component {
         }, (err) => {
             console.log(err);
         });
+    }
 
-        // try {
+    handleUsernameBlur = () => {
+        const { username } = this.state;
 
-        //     const promise = await fetch('http://localhost:8080/api/user/login', {
-        //         method: 'POST',
-        //         body: JSON.stringify({
-        //             username,
-        //             password
-        //         }),
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         }
-        //     })
+        if (!username) {
+            this.setState({
+                usernameError: true
+            })
+        } else if (this.state.usernameError) {
+            this.setState({
+                usernameError: false
+            })
+        }
+    }
 
-        //     const authToken = promise.headers.get('Authorization');
-        //     document.cookie = `x-auth-token=${authToken}`;
-
-        //     const response = await promise.json();
-
-        //     if (response.username && authToken) {
-        //         this.props.history.push('/')
-        //     }
-
-        // } catch (error) {
-        //     console.log(error)
-        // }
-
-
+    handlePasswordBlur = () => {
+        const { password } = this.state
+        if (!password) {
+            this.setState({
+                passwordError: true
+            })
+        } else if (this.state.passwordError) {
+            this.setState({
+                passwordError: false
+            })
+        }
     }
 
     render() {
-        const { username, password } = this.state;
+        const { username, usernameError, password, passwordError } = this.state;
 
         return (
             <div className={styles.total}>
@@ -81,40 +95,36 @@ class LoginPage extends Component {
                                 label='Username'
                                 type='text'
                                 onChange={(e) => { this.onChange(e, 'username') }}
+                                onBlur={this.handleUsernameBlur}
                                 value={username}
+                                error={usernameError}
                             />
+                            {usernameError ? (<span className={styles.err}>The username should not be empty</span>) : null}
+
                             <Input
                                 id='password'
                                 label='Password'
                                 type='password'
                                 onChange={(e) => { this.onChange(e, 'password') }}
+                                onBlur={this.handlePasswordBlur}
                                 value={password}
+                                error={passwordError}
                             />
+                            {passwordError ? (<span className={styles.err}>The password must not be empty</span>) : null}
+
                             <button className={styles.submit} type="submit">Login</button>
                         </form>
 
                         <p className={styles['forgot-pass']}>Forgot Password ?</p>
-
-                        <div className={styles['social-media']}>
-                            <ul>
-                                <li>F</li>
-                                <li>T</li>
-                                <li>I</li>
-                                <li>P</li>
-                            </ul>
-                        </div>
 
                         <div className={styles['sub-cont']}>
                             <div className={styles.img}>
                                 <div className={styles['img-text']}>
                                     <h2>New here?</h2>
                                     <p>Sign up and discover the great articles!</p>
-                                </div>
-                                <div className={styles['img-btn']}>
-                                    <span className={styles['m-up']}>Register</span>
+                                    <Link to={'/register'}>Register</Link>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

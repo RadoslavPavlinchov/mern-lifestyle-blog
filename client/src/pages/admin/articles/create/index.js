@@ -13,6 +13,10 @@ const CreateArticle = () => {
     const [image, setImage] = useState(null);
     const [category, setCategory] = useState('');
 
+    const [titleError, setTitleError] = useState(false);
+    const [articleError, setArticleError] = useState(false);
+    const [categoryError, setCategoryError] = useState(false);
+
     const openWidget = () => {
         const widget = window.cloudinary.createUploadWidget({
             cloudName: 'dymjwxfvd',
@@ -52,6 +56,30 @@ const CreateArticle = () => {
         setCategory('')
     }
 
+    const handleTitleBlur = () => {
+        if (!title) {
+            setTitleError(true)
+        } else if (titleError) {
+            setTitleError(false)
+        }
+    }
+
+    const handleArticleBlur = () => {
+        if (!article) {
+            setArticleError(true)
+        } else if (articleError) {
+            setArticleError(false)
+        }
+    }
+
+    const handleCategoryBlur = () => {
+        if (!category) {
+            setCategoryError(true)
+        } else if (categoryError) {
+            setCategoryError(false)
+        }
+    }
+
     return (
         <div className={styles['admin-wrapper']}>
 
@@ -71,15 +99,18 @@ const CreateArticle = () => {
                     <SubmitButton title='Upload Image' onClick={openWidget} />
 
                     <form>
-                        {image ? (<img src={image} className={styles['img-cloud']}/>) : null}
+                        {image ? (<img src={image} className={styles['img-cloud']} alt='img' />) : null}
 
                         <Input
                             id='title'
                             label='Title'
                             type='text'
                             onChange={e => setTitle(e.target.value)}
+                            onBlur={handleTitleBlur}
+                            error={titleError}
                             value={title}
                         />
+                        {titleError ? (<span className={styles.err}>This field should not be empty</span>) : null}
 
                         <label htmlFor="article">Article</label>
 
@@ -87,16 +118,22 @@ const CreateArticle = () => {
                             id="article"
                             name="article"
                             value={article}
+                            onBlur={handleArticleBlur}
+                            error={articleError}
                             onChange={e => setArticle(e.target.value)}
                         />
+                        {articleError ? (<span className={styles.err}>This field should not be empty</span>) : null}
 
                         <Input
                             id='category'
                             label='Category'
                             type='text'
                             onChange={e => setCategory(e.target.value)}
+                            onBlur={handleCategoryBlur}
+                            error={categoryError}
                             value={category}
                         />
+                        {categoryError ? (<span className={styles.err}>This field should not be empty</span>) : null}
 
                         <SubmitButton title="Create" onClick={handleSubmit} />
                     </form>
